@@ -1,0 +1,42 @@
+<style>
+    .st-pusher .st-content .st-content-inner .container-fluid {}
+</style>
+
+
+<!-- .panel -->
+
+<div class=" panel-default paper-shadow" data-z="0.5" data-hover-z="1" data-animated *ngIf="isInProducts(product)">
+    <div class="panel-heading">
+        <table style="width:100%">
+            <tr>
+                <td>
+                    <i class="fa fa-sign-in fa-fw"></i> Identifiant : Reçus par email sous 24h
+                    <br>{{myuser?.email}}</td>
+                <td>
+                    <i class="fa fa-globe fa-fw"></i>
+                    <a target="_blank" [href]="product.link_to" style="font-size:15px">Accès au Logiciel</a>
+                </td>
+                <td>
+                    <span *ngIf="product.downloadableBonus && product.downloadableBonus != ''">
+                        <i class="fa fa-star fa-fw"></i>
+                        <a [routerLink]="['/bonus/'+product.downloadableBonus]" style="font-size:15px">Accès Bonus Téléchargeables</a>
+                    </span>
+                </td>
+                <td>
+                    <i class="fa fa-graduation-cap fa-fw"></i>
+                    <a [routerLink]="['/trainings/cours/'+product.formationProduit]" style="font-size:15px">Accès Formation Logiciel</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<!-- // END .panel -->
+
+
+<span *ngIf="product">
+    <div class="visible-xs" style="text-align:center">
+        <a [href]="product.iframelink" target="_blank">Afficher la page sur mobile</a>
+    </div>
+
+    <iframe width="100%" height="100%" frameborder="0" [src]="product.iframelink | safe" id="learnyframe" *ngIf="product.iframelink"></iframe>
+</span>

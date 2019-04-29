@@ -1,0 +1,114 @@
+<style>
+    .fa-step-backward:hover,
+    .fa-step-forward:hover {
+        color: rgb(5, 12, 119);
+        cursor: pointer;
+    }
+</style>
+
+<div class="row" *ngIf="mycourse">
+
+    <div class="col-sm-3">
+        <div style="height:40px"></div>
+        <div class="panel panel-default">
+            <div class="panel-heading panel-heading-gray" style="height:90px; background-color:rgb(0, 0, 65)">
+                <h3 class="text-light" style="margin-top:5px; color:white">Plan de la Formation</h3>
+            </div>
+        </div>
+
+        <div class="panel panel-default curriculum open paper-shadow" data-z="0.5" *ngFor="let chapitre of mycourse?.chapitres">
+            <div class="panel-heading panel-heading-gray" data-toggle="collapse" [id]="'ggleclick'+chapitre?.numero" [attr.data-target]="'#toggle'+chapitre?.numero">
+                <div class="media">
+                    <div class="media-left">
+                        <span [class]="graduateColor[chapitre.numero]">
+                            <i class="fa fa-graduation-cap"></i>
+                        </span>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="text-headline">{{chapitre.titre}}</h4>
+                        <p>
+                            <span innerHTML="{{chapitre?.description}}"></span>
+                        </p>
+                    </div>
+                </div>
+                <span class="collapse-status collapse-close">O</span>
+            </div>
+            <div class="list-group collapse out" [id]="'toggle'+chapitre?.numero">
+                <div class="list-group-item media" *ngFor="let sousChapitre of chapitre?.sousChapitres" (click)="onDisplaySubChapter(chapitre, sousChapitre)">
+                    <div class="row">
+                        <div class="col-sm-9 col-lg-9 col-xs-9">
+                            <span class="text-crt">{{sousChapitre?.numero}}.</span>
+                            &nbsp;&nbsp;
+                            <span [id]="'where'+chapitre?.numero+'.'+sousChapitre?.numero">
+                                <span *ngIf="chapitre?.numero == mycourse?.chapitres[0].numero && sousChapitre?.numero == mycourse?.chapitres[0].sousChapitres[0].numero">
+                                    <i class="fa fa-fw fa-circle text-green-300"></i>
+                                </span>
+                            </span>
+                            {{sousChapitre?.titre}}
+                        </div>
+                        <div class="col-sm-3 col-lg-3 col-xs-3">{{sousChapitre?.duree}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-sm-9">
+        <div class="page-section">
+            <div class="row">
+                <div class="col-sm-10">
+                    <div class="panel panel-default curriculum open paper-shadow">
+                        <div class="row panel-heading panel-heading-gray" style="height:90px; background-color:rgb(0, 0, 65)">
+                            <div class="col-sm-2 col-lg-2 col-xs-2">
+                                <a class="btn btn-primary" (click)="prevSection()">Précédent</a>
+                            </div>
+                            <div class="col-sm-8 col-lg-8 col-xs-8">
+                                <h1 class="margin-none hidden-sm hidden-xs" style="text-align:center; color:white">{{mycourse?.titre}}</h1>
+                            </div>
+                            <div class="col-sm-2 col-lg-2 col-xs-2">
+                                <div style="float:right">
+                                    <a class="btn btn-primary" (click)="nextSection()">Suivant</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+
+            <div class="row">
+                <div class="col-sm-1 hidden-sm"></div>
+                <div class="col-sm-11">
+                    <div class="media-body">
+                        <h1>
+                            <span id="currentNumber">
+                                {{mycourse?.chapitres[0].numero}}.{{mycourse?.chapitres[0].sousChapitres[0].numero}}</span>.&nbsp;
+                            <span class="text-display-1 margin-none" id="chapterSouschapterTitle">{{mycourse?.chapitres[0].sousChapitres[0].titre}}</span>
+                        </h1>
+                    </div>
+                    <br>
+                    <div>
+                        <div class="row">
+                            <div class="col-sm-12 col-lg-9 col-xs-12">
+                                <div class="embed-responsive embed-responsive-16by9" style="width: 100% !important;">
+                                    <span id="chapterSouschapterVideo">
+                                        <iframe [src]="mycourse?.chapitres[0].sousChapitres[0].video | safe" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen"></iframe>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <br>
+            <div class="col">
+                <br>
+                <div id="chapterSouschapterTexte">
+                    <div innerHTML="{{mycourse?.chapitres[0].sousChapitres[0].texte}}"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

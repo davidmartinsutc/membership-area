@@ -1,0 +1,49 @@
+<div class="page-header">
+  <h1>Gestionnaire de Bonus</h1>
+</div>
+
+
+<div class="jumbotron">
+
+  <div class="row">
+    <h2>Ajouter un Bonus</h2>
+    <br>
+    <form (ngSubmit)="onSubmit(addBonusForm)" #addBonusForm="ngForm">
+
+      <div class="form-group">
+        <label for="bonusContent">Contenu (html)</label>
+        <textarea class="form-control" id="bonusContent" rows="4" name="bonus_content" style="height:200px" [ngModel]="mybonus?.content"></textarea>
+      </div>
+
+      <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+  </div>
+
+  <div class="row">
+    <h2>Liste des Bonus</h2>
+    <br>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Date et Heure</th>
+          <th scope="col">Contenu (html)</th>
+          <th scope="col">Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let bonus of bonuses">
+          <td>{{bonus.date}}</td>
+          <td>{{bonus.content}}</td>
+          <td>
+            <a class="btn btn-primary" (click)="bonusDelete(bonus)">Delete</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+
+  </div>
+  <br>
+  <br>
+</div>

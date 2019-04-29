@@ -1,0 +1,223 @@
+<style>
+    .bs-wizard {
+        margin-top: 40px;
+    }
+
+    /*Form Wizard*/
+
+    .bs-wizard {
+        border-bottom: solid 1px #e0e0e0;
+        padding: 0 0 10px 0;
+    }
+
+    .bs-wizard>.bs-wizard-step {
+        padding: 0;
+        position: relative;
+    }
+
+    .bs-wizard>.bs-wizard-step .bs-wizard-stepnum {
+        color: #595959;
+        font-size: 16px;
+        margin-bottom: 5px;
+    }
+
+    .bs-wizard>.bs-wizard-step .bs-wizard-info {
+        color: #999;
+        font-size: 14px;
+    }
+
+    .bs-wizard>.bs-wizard-step>.bs-wizard-dot {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        display: block;
+        background: #7187ac;
+        top: 45px;
+        left: 50%;
+        margin-top: -15px;
+        margin-left: -15px;
+        border-radius: 50%;
+    }
+
+    .bs-wizard>.bs-wizard-step>.bs-wizard-dot:after {
+        content: ' ';
+        width: 14px;
+        height: 14px;
+        background: #5f7191;
+        border-radius: 50px;
+        position: absolute;
+        top: 8px;
+        left: 8px;
+    }
+
+    .bs-wizard>.bs-wizard-step>.progress {
+        position: relative;
+        border-radius: 0px;
+        height: 8px;
+        box-shadow: none;
+        margin: 20px 0;
+        background: rgb(230, 230, 230);
+    }
+
+    .bs-wizard>.bs-wizard-step>.progress>.progress-bar {
+        width: 0px;
+        box-shadow: none;
+        background: #7187ac;
+    }
+
+    .bs-wizard>.bs-wizard-step.complete>.progress>.progress-bar {
+        width: 100%;
+    }
+
+    .bs-wizard>.bs-wizard-step.active>.progress>.progress-bar {
+        width: 50%;
+    }
+
+    .bs-wizard>.bs-wizard-step:first-child.active>.progress>.progress-bar {
+        width: 0%;
+    }
+
+    .bs-wizard>.bs-wizard-step:last-child.active>.progress>.progress-bar {
+        width: 100%;
+    }
+
+    .bs-wizard>.bs-wizard-step.disabled>.bs-wizard-dot {
+        background-color: #F7F8FC;
+    }
+
+    .bs-wizard>.bs-wizard-step.disabled>.bs-wizard-dot:after {
+        opacity: 0;
+    }
+
+    .bs-wizard>.bs-wizard-step:first-child>.progress {
+        left: 50%;
+        width: 50%;
+    }
+
+    .bs-wizard>.bs-wizard-step:last-child>.progress {
+        width: 50%;
+    }
+
+    .bs-wizard>.bs-wizard-step.disabled a.bs-wizard-dot {
+        pointer-events: none;
+        background: rgb(230, 230, 230);
+    }
+
+    /*END Form Wizard*/
+
+    form.checkout {
+        max-width: 500px;
+        margin: 2rem auto;
+        text-align: center;
+        border: 2px solid #eee;
+        border-radius: 8px;
+        padding: 1rem 2rem;
+        background: white;
+
+        font-family: monospace;
+        color: #525252;
+        font-size: 1.1rem;
+    }
+
+    form.checkout button {
+        padding: 0.5rem 1rem;
+        color: white;
+        background: coral;
+        border: none;
+        border-radius: 4px;
+        margin-top: 1rem;
+    }
+
+    form.checkout button:active {
+        background: rgb(165, 76, 43);
+    }
+
+    .StripeElement {
+        margin: 1rem 0 1rem;
+        background-color: white;
+        padding: 8px 12px;
+        border-radius: 4px;
+        border: 1px solid transparent;
+        box-shadow: 0 1px 3px 0 #e6ebf1;
+        -webkit-transition: box-shadow 150ms ease;
+        transition: box-shadow 150ms ease;
+    }
+
+    .StripeElement--focus {
+        box-shadow: 0 1px 3px 0 #cfd7df;
+    }
+
+    .StripeElement--invalid {
+        border-color: #fa755a;
+    }
+
+    .StripeElement--webkit-autofill {
+        background-color: #fefde5 !important;
+    }
+</style>
+
+
+<div class="row">
+
+    <div class="col-sm-2">
+        <hr/> </div>
+
+    <div class="col-sm-7">
+
+        <div class="container" style="margin-left:-40px">
+
+            <div class="row bs-wizard" style="border-bottom:0;">
+                <div class="col-xs-3 bs-wizard-step complete">
+                    <div class="text-center bs-wizard-stepnum">&nbsp;</div>
+                    <div class="progress">
+                        <div class="progress-bar"></div>
+                    </div>
+                    <a class="bs-wizard-dot"></a>
+                    <div class="text-center bs-wizard-stepnum">Panier</div>
+                </div>
+
+                <div class="col-xs-3 bs-wizard-step active">
+                    <!-- complete -->
+                    <div class="text-center bs-wizard-stepnum">&nbsp;</div>
+                    <div class="progress">
+                        <div class="progress-bar"></div>
+                    </div>
+                    <a class="bs-wizard-dot"></a>
+                    <div class="text-center bs-wizard-stepnum">Paiement</div>
+                </div>
+
+                <div class="col-xs-3 bs-wizard-step disabled">
+                    <!-- active -->
+                    <div class="text-center bs-wizard-stepnum">&nbsp;</div>
+                    <div class="progress">
+                        <div class="progress-bar"></div>
+                    </div>
+                    <a class="bs-wizard-dot"></a>
+                    <div class="text-center bs-wizard-stepnum">Confirmation</div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <form #checkout="ngForm" (ngSubmit)="onSubmit(checkout)" class="checkout" id="payment-form">
+            <div class="form-row">
+                <label for="card-info">Informations de Paiement</label>
+                <img class="img-responsive" style="margin:auto; width:60%" src="/images/accepted_c22e0.png">
+                <br>
+                <div id="card-info" #cardInfo></div>
+
+                <div id="card-errors" role="alert" *ngIf="error">{{ error }}</div>
+            </div>
+
+            <button id="valid-button" type="submit">Valider {{mycart?.total}} €</button>
+        </form>
+        <br><br>
+            <div id="valid-loader" class="loader-small" style="margin: 20px; display:none; margin:auto"></div>
+    </div>
+
+    <div class="col-sm-3">
+        <hr/>
+    </div>
+</div>

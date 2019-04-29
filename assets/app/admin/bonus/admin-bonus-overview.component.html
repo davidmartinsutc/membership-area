@@ -1,0 +1,69 @@
+<div class="page-header">
+  <h1>Liste des pages de Bonus</h1>
+</div>
+
+
+<div class="jumbotron">
+
+  <div class="row">
+    <h2>Ajouter une page de Bonus</h2>
+    <br>
+    <form (ngSubmit)="onSubmit(addBonusPageForm)" #addBonusPageForm="ngForm">
+
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Titre de la page de bonus</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <input type="text" id="titre" class="form-control" [ngModel]="myBonusPage?.titre" name="titre">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="form-group">
+        <label for="description">Description (html)</label>
+        <textarea class="form-control" id="description" rows="4" name="description" style="height:120px" [ngModel]="myBonusPage?.description"></textarea>
+      </div>
+      <button class="btn btn-primary" type="submit">Ajouter</button>
+    </form>
+  </div>
+  <br>
+  <div class="row">
+    <h2>Liste des Pages de Bonus</h2>
+    <br>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Nom de la Page</th>
+          <th scope="col">ID</th>
+          <th scope="col">Short Description</th>
+          <th scope="col">Editeur de bonus</th>
+
+          <th scope="col">Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let bonusPage of bonusPages">
+          <td>{{bonusPage.titre}}</td>
+          <td>{{bonusPage.bonusPageID}}</td>
+          <td>{{bonusPage.description}}</td>
+          <td>
+            <a class="btn btn-primary" [routerLink]="['../bonuspageeditor/'+bonusPage.bonusPageID]">Edit</a>
+          </td>
+          <td>
+            <a class="btn btn-primary" (click)="bonusPageDelete(bonusPage)">Delete</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+
+  </div>
+  <br>
+  <br>
+</div>

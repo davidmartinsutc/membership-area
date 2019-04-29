@@ -1,0 +1,305 @@
+<div class="media media-grid media-clearfix-xs" *ngIf="product">
+    <div class="media-body">
+
+        <div class="page-section">
+            <div class="media">
+                <div class="media-left">
+                    <span class="icon-block s60 bg-lightred">
+                        <i [class]="product?.fa_title"></i>
+                    </span>
+                </div>
+                <div class="media-body">
+                    <h1 class="text-display-1 margin-none">{{product?.name}}</h1>
+                    <p class="margin-none">
+                        {{product?.second_title}}
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-section">
+            <div class="width-450 paragraph-inline">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <div *ngIf="product?.video != '' && product?.video;else other_content">
+                        <iframe style="overflow:hidden;" scrolling="no" [src]="product?.video | safe" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen"></iframe>
+                    </div>
+                    <ng-template #other_content>
+                        <img [src]="product?.picture" style="height:250px">
+                    </ng-template>
+                </div>
+            </div>
+
+            <div innerHTML="{{product?.description_detail}}"></div>
+
+            <br/>
+            <p class="margin-none">
+                <span *ngFor="let section of product?.sections">
+                    <span class="label bg-gray-dark" *ngIf="section.sectionName == 'Best Sellers' || section.sectionName == 'Nouveau'">
+                        {{section.sectionName}}</span>
+                </span>
+                <span *ngFor="let section of product?.sections">
+                    <span class="label label-grey-200" *ngIf="section.sectionName != 'Best Sellers' && section.sectionName != 'Nouveau'">
+                        {{section.sectionName}}</span>
+                </span>
+
+            </p>
+        </div>
+
+        <div class="page-section">
+            <h2 class="text-headline margin-none">Que vais-je apprendre ?</h2>
+            <br>
+            <ul class="list-group relative paper-shadow margin-none" data-hover-z="0.5" data-animated>
+                <div innerHTML="{{product?.benefits_detail}}"></div>
+            </ul>
+        </div>
+
+        <!--
+        <div class="pull-right">
+            <a class="btn btn-white btn-circle paper-shadow relative" data-z="1" href="#">
+                <i class="md md-add"></i>
+            </a>
+        </div>
+
+        <h2 class="text-headline margin-none">Avis</h2>
+        <p class="text-subhead text-light">N'hésitez pas à nous laisser votre avis après la formation</p>
+        <br/>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="testimonial">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam amet doloremque enim error
+                                id, inventore magni odio odit quo tenetur.</p>
+                        </div>
+                    </div>
+                    <div class="media v-middle">
+                        <div class="media-left">
+                            <img src="/images/people/50/guy-7.jpg" alt="People" class="img-circle width-40" />
+                        </div>
+                        <div class="media-body">
+                            <p class="text-subhead margin-v-5-0">
+                                <strong>Adrian D.
+                                    <span class="text-muted">@ Mosaicpro Inc.</span>
+                                </strong>
+                            </p>
+                            <p class="small">
+                                <span class="fa fa-fw fa-star text-yellow-800"></span>
+                                <span class="fa fa-fw fa-star text-yellow-800"></span>
+                                <span class="fa fa-fw fa-star text-yellow-800"></span>
+                                <span class="fa fa-fw fa-star-o text-yellow-800"></span>
+                                <span class="fa fa-fw fa-star-o text-yellow-800"></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="testimonial">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam amet doloremque enim error
+                                id, inventore magni odio odit quo tenetur.</p>
+                        </div>
+                    </div>
+                    <div class="media v-middle">
+                        <div class="media-left">
+                            <img src="/images/people/50/guy-4.jpg" alt="People" class="img-circle width-40" />
+                        </div>
+                        <div class="media-body">
+                            <p class="text-subhead margin-v-5-0">
+                                <strong>Adrian D.
+                                    <span class="text-muted">@ Mosaicpro Inc.</span>
+                                </strong>
+                            </p>
+                            <p class="small">
+                                <span class="fa fa-fw fa-star text-yellow-800"></span>
+                                <span class="fa fa-fw fa-star text-yellow-800"></span>
+                                <span class="fa fa-fw fa-star text-yellow-800"></span>
+                                <span class="fa fa-fw fa-star-o text-yellow-800"></span>
+                                <span class="fa fa-fw fa-star-o text-yellow-800"></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    -->
+
+    </div>
+    <div class="media-right">
+
+        <div class="page-section width-270 width-auto-xs">
+
+
+
+
+            <!-- .panel -->
+            <div class="panel panel-default paper-shadow" data-z="0.5" data-hover-z="1" data-animated>
+                <div class="panel-heading">
+                    <h4 class="text-headline">À Propos du Cours</h4>
+                </div>
+                <div class="panel-body">
+                    <p class="text-caption margin-none">
+                        <i class="fa fa-clock-o fa-fw"></i>Durée : {{product?.duree}} &nbsp;
+                        <br>
+                        <i class="fa fa-calendar fa-fw"></i> Mise à Jour : {{product?.maj.toLocaleString("en-GB", {year: "numeric", month: "numeric", day:
+                        "numeric"})}}
+                        <br/>
+                    </p>
+                </div>
+                <hr class="margin-none" />
+
+
+
+
+
+                <div class="panel-body text-center" *ngIf="product.price == 0 && product">
+
+                    <p>
+                        <span style="font-size:18px;color:green">
+                            <i class="fa fa-check fa-fw"></i>Formation Gratuite</span>
+                    </p>
+                    <br>
+                    <p>
+                        <a class="btn btn-success btn-lg paper-shadow relative" data-z="1" data-hover-z="2" data-animated (click)="goToFormations()">
+                            <span style="font-size:15px;">Accèder à la Formation</span>
+                        </a>
+                        <br>
+                    </p>
+                </div>
+
+
+                <div class="panel-body text-center" *ngIf="product.price > 0">
+                    <div *ngIf="!isInTrainings(product)">
+                        <p *ngIf="myuser && product">
+                            <a class="btn btn-warning btn-lg paper-shadow relative" data-z="1" data-hover-z="2" data-animated *ngIf="!isInBasket(myuser, product)"
+                                (click)="addInBacket()">
+                                <span style="font-size:18px;">
+                                    <span class="glyphicon glyphicon-shopping-cart"></span> &nbsp; Ajouter Au Panier</span>
+                            </a>
+                            <span *ngIf="isInBasket(myuser, product)">
+                                <span style="font-size:18px;color:green">
+                                    <i class="fa fa-check fa-fw"></i>Ajouté au panier</span>
+                                <br>
+                                <div style="height:4px;font-size:4px;">&nbsp;</div>
+                                <a class="btn btn-warning btn-lg paper-shadow relative" data-z="1" data-hover-z="2" data-animated [routerLink]="['/checkout']">
+                                    <span style="font-size:18px;">
+                                        <span class="glyphicon glyphicon-shopping-cart"></span> &nbsp; Voir Mon Panier</span>
+                                </a>
+                            </span>
+                        </p>
+                        <br>
+                        <div class="clp-component-render">
+                            <span class="badge badge-lg badge-accented coral">
+                                Prix Exclusivité Membre
+                            </span>
+                        </div>
+                        <br>
+                        <p>
+                            <span style="font-size:22px; font-weight:bold">{{product?.price}} €</span> &nbsp;&nbsp;
+                            <s>{{product?.value}} €</s>
+                        </p>
+                    </div>
+                    <div *ngIf="isInTrainings(product)">
+                        <a class="btn btn-success btn-lg paper-shadow relative" data-z="1" data-hover-z="2" data-animated (click)="goToFormations()">
+                            <span style="font-size:15px;">Accèder à la Formation</span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+            <!-- // END .panel -->
+
+
+
+
+
+            <!-- .panel -->
+            <div class="panel panel-default paper-shadow" data-z="0.5" data-hover-z="1" data-animated *ngIf="product.linked_trainings.length > 0">
+                <div class="panel-body">
+                    <h6 class="text-headline">Ces Cours pourraient vous interesser</h6>
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item" *ngFor="let linkedTraining of product?.linked_trainings">
+                        <div class="media v-middle">
+                            <div class="media-left">
+                                <div class="icon-block s30 bg-grey-400 text-white">
+                                    <i class="fa fa-mortar-board"></i>
+                                </div>
+                            </div>
+                            <div class="media-body">
+                                <a [routerLink]="['/trainings/'+linkedTraining.name]" class="link-text-color">{{linkedTraining.name}}</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <!-- // END .panel -->
+
+            <!-- .panel -->
+            <div class="panel panel-default paper-shadow" data-z="0.5" data-hover-z="1" data-animated *ngIf="product.linked_products.length > 0">
+                <div class="panel-body">
+                    <span style="font-size:20px">Ces Logiciels pourraient vous interesser</span>
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item" *ngFor="let linkedProducts of product?.linked_products">
+                        <div class="media v-middle">
+                            <div class="media-left">
+                                <div class="icon-block s30 bg-grey-400 text-white">
+                                    <i class="fa fa-rocket"></i>
+                                </div>
+                            </div>
+                            <div class="media-body">
+                                <a [routerLink]="['/products/'+linkedProducts.name]" class="link-text-color">{{linkedProducts.name}}</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <!-- // END .panel -->
+        </div>
+        <!-- // END .page-section -->
+
+    </div>
+</div>
+
+<!-- Ajout au panier -->
+<div class="backdrop" [ngStyle]="{'display': displayPopUp}"></div>
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display': displayPopUp}">
+    <div class="row">
+        <div class="col-lg-12" style="height:200px">
+        </div>
+        <div class="col-lg-12">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content" style="border:1px solid black">
+                    <div class="modal-header">
+                        <button type="button" class="close" aria-label="Close" (click)="onHideAdded()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title"> Ajouté au Panier !</h4>
+                    </div>
+                    <div class="row modal-body">
+                        <div class="col-lg-5 col-xs-12">
+                            <a class="btn btn-info btn-lg paper-shadow relative" data-z="1" data-hover-z="2" data-animated (click)="onHideAdded()">
+                                <span style="font-size:18px;">
+                                    <span class="glyphicon glyphicon-shopping-cart"></span> &nbsp; Continuer ma visite</span>
+                            </a>
+                        </div>
+                        <div class="col-lg-2 col-xs-12"></div>
+                        <div class="col-lg-4 col-xs-12">
+                            <a class="btn btn-warning btn-lg paper-shadow relative" data-z="1" data-hover-z="2" data-animated [routerLink]="['/checkout']">
+                                <span style="font-size:18px;">
+                                    <span class="glyphicon glyphicon-shopping-cart"></span> &nbsp; Voir Mon Panier</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+    </div>
+</div>
+<!-- /.modal -->
+<!-- Fin au panier -->

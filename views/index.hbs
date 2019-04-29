@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html class="st-layout ls-top-navbar-large ls-bottom-footer show-sidebar sidebar-l1" lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <base href="/">
+  <title>Smalt Online - Espace Membre</title>
+
+  <link href="/stylesheets/vendor/all.css" rel="stylesheet">
+  <link href="/stylesheets/style.css" rel="stylesheet">
+  <link href="/stylesheets/app/app.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/stylesheets/font-awesome/css/font-awesome.min.css">
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/smalt.ico" />
+
+  <link href="https://vjs.zencdn.net/6.6.3/video-js.css" rel="stylesheet">
+
+  <!-- If you'd like to support IE8 -->
+  <script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
+  <script src="https://vjs.zencdn.net/6.6.3/video.js"></script>
+</head>
+
+<body>
+  <my-app>Loading...</my-app>
+
+
+  <!-- Footer -->
+  <footer class="footer">
+    <strong>Smalt Online</strong> Espace Membre
+  </footer>
+  <!-- // Footer -->
+
+
+  <script>
+    var colors = {
+      "danger-color": "#e74c3c",
+      "success-color": "#81b53e",
+      "warning-color": "#f0ad4e",
+      "inverse-color": "#2c3e50",
+      "info-color": "#2d7cb5",
+      "default-color": "#6e7882",
+      "default-light-color": "#cfd9db",
+      "purple-color": "#9D8AC7",
+      "mustard-color": "#d4d171",
+      "lightred-color": "#e15258",
+      "body-bg": "#f6f6f6"
+    };
+    var config = {
+      theme: "html",
+      skins: {
+        "default": {
+          "primary-color": "#42a5f5"
+        }
+      }
+    };
+  </script>
+
+  <script src="/js/app/bundle.js"></script>
+  <script src="/js/vendor/all.js"></script>
+
+  <script src="https://js.stripe.com/v3/"></script>
+  <script type="text/javascript">
+    var stripe = Stripe('pk_live_gusJj1qsJP53swR3MImlnCp2');
+    var elements = stripe.elements();
+  </script>
+
+  <script src="https://vjs.zencdn.net/6.6.3/video.js"></script>
+
+</body>
+
+</html>

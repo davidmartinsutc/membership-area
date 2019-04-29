@@ -1,0 +1,60 @@
+<div class="page-header">
+        <h1>Correspondance avec Zapier</h1>
+</div>
+      
+
+      <div class="jumbotron">
+
+        <div class="row">
+                <h2>Ajouter une Correspondance avec Zapier</h2>
+                <br>
+                <form (ngSubmit)="onSubmit(addZapiermatchingForm)" #addZapiermatchingForm="ngForm">
+
+                    <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th scope="col">zapier_name</th>
+                                <th scope="col">product_id (si plusieurs, separer par &&)</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td><input type="text" id="zapier_name" class="form-control" [ngModel]="myzapiermatching?.zapier_name" name="zapier_name" ></td>
+                                <td><input type="text" id="product_id" class="form-control" [ngModel]="myzapiermatching?.product_id" name="product_id" ></td>
+                                <td><input type="hidden" id="oldZapiermatchingName" class="form-control" [ngModel]="myzapiermatching?.zapier_name" name="oldZapiermatchingName" ></td>
+                            </tr>
+                            </tbody>
+                    </table>
+                    <button
+                    class="btn btn-primary"
+                    type="submit">Submit</button>
+                </form>
+       </div>
+
+        <div class="row">
+            <h2>Liste des Correspondances Zapier</h2>
+            <br>
+
+            <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">zapier_name</th>
+                        <th scope="col">product_id</th>
+                        <th scope="col">Delete</th>
+                        <th scope="col">Edit</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let zapiermatching of zapiermatchings">
+                        <td>{{zapiermatching.zapier_name}}</td>
+                        <td>{{zapiermatching.product_id}}</td>
+                        <td><a class="btn btn-primary" (click)="zapiermatchingDelete(zapiermatching)">Delete</a></td>
+                        <td><a class="btn btn-primary" (click)="zapiermatchingEdit(zapiermatching)">Edit</a></td>
+                      </tr>
+                    </tbody>
+            </table>
+
+
+        </div>
+<br><br>
+</div>

@@ -1,0 +1,144 @@
+<div class="page-section">
+    <h1 class="text-display-1 margin-none">Tableau de Bord</h1>
+</div>
+
+<div class="panel panel-default">
+    <div class="media v-middle">
+        <div class="media-left">
+            <div class="bg-green-400 text-white">
+                <div class="panel-body">
+                    <i class="fa fa-info fa-fw fa-2x"></i>
+                </div>
+            </div>
+        </div>
+        <div class="media-body">
+            N'oubliez pas jeter un oeil régulièrement aux
+            <span class="text-body-2"> Nouveaux Bonus</span>
+        </div>
+        <div class="media-right media-padding">
+            <a class="btn btn-white paper-shadow relative" data-z="0.5" data-hover-z="1" data-animated [routerLink]="['/membre/bonus']">
+                Je veux voir ça !
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="row" data-toggle="isotope">
+
+
+    <!-- Partie Gauche -->
+    <div class="item col-xs-12 col-lg-6">
+        <div class="panel panel-default paper-shadow" data-z="0.5">
+            <div class="panel-heading">
+                <h4 class="text-headline margin-none">Formations</h4>
+                <p class="text-subhead text-light">Vos Formations Récentes</p>
+            </div>
+            <span *ngIf="trainings;else trainings_chargement">
+                <ul class="list-group">
+                    <li class="list-group-item media v-middle" *ngFor="let training of trainings">
+                        <div class="media-body">
+                            <i class="fa fa-graduation-cap"></i>&nbsp;&nbsp;
+                            <a [href]="'trainings/cours/'+training.link_to" class="text-subhead list-group-link">{{training.name}}</a>
+                        </div>
+                        <div class="media-right text-center">
+                            <a class="btn btn-success" [href]="'trainings/cours/'+training.link_to">Accès</a>
+                        </div>
+                    </li>
+                </ul>
+            </span>
+            <ng-template #trainings_chargement>
+                <div class="loader-small" style="margin: 20px;"></div>
+            </ng-template>
+            <div class="panel-footer text-right">
+                <a [routerLink]="['/membre/formations']" class="btn btn-white paper-shadow relative" data-z="0" data-hover-z="1" data-animated>Voir Plus</a>
+            </div>
+        </div>
+
+        <div class="panel panel-default paper-shadow" data-z="0.5">
+            <div class="panel-heading">
+                <h4 class="text-headline margin-none">Logiciels</h4>
+                <p class="text-subhead text-light">Vos Logiciels Smalt Online</p>
+            </div>
+            <span *ngIf="products;else products_chargement">
+                <ul class="list-group">
+                    <li class="list-group-item media v-middle" *ngFor="let product of products">
+                        <div class="media-body">
+                            <h4 class="text-subhead margin-none">
+                                <a [href]="product.link_to" target="_blank" class="text-subhead list-group-link">{{product.name}}</a>
+                            </h4>
+                            <div class="caption">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <i class="fa fa-sign-in fa-fw"></i>&nbsp;&nbsp;Identifiant : Reçus par email sous 24h</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="text-center hidden-xs" style="display: flex; margin-top: -40px; float: right;">
+                            <a class="btn btn-success" target="_blank" [href]="product.link_to">Accès</a>
+                            &nbsp;&nbsp;
+                            <a class="btn btn-success" [routerLink]="['/trainings/cours/'+product.formationProduit]">Formation</a>
+                            <span *ngIf="product.downloadableBonus && product.downloadableBonus != ''">&nbsp;&nbsp;
+                                <a class="btn btn-success" [routerLink]="['/bonus/'+product.downloadableBonus]">Bonus</a>
+                            </span>
+                        </div>
+                        <div class="text-center visible-xs" style="display: flex; float: left;">
+                            <a class="btn btn-success" target="_blank" [href]="product.link_to">Accès</a>
+                            &nbsp;&nbsp;
+                            <a class="btn btn-success" [routerLink]="['/trainings/cours/'+product.formationProduit]">Formation</a>
+                            <span *ngIf="product.downloadableBonus && product.downloadableBonus != ''">&nbsp;&nbsp;
+                                <a class="btn btn-success" [routerLink]="['/bonus/'+product.downloadableBonus]">Bonus</a>
+                            </span>
+                        </div>
+                    </li>
+                </ul>
+            </span>
+            <ng-template #products_chargement>
+                <div class="loader-small" style="margin: 20px;"></div>
+            </ng-template>
+            <div class="panel-footer text-right">
+                <a [routerLink]="['/membre/produits']" class="btn btn-white paper-shadow relative" data-z="0" data-hover-z="1" data-animated>Voir Plus</a>
+            </div>
+        </div>
+    </div>
+    <!-- Fin partie gauche -->
+
+
+    <!-- Partie Droite -->
+    <div class="item col-xs-12 col-lg-6">
+        <div class="panel panel-default paper-shadow" data-z="0.5">
+            <div class="panel-body">
+                <h4 class="text-headline margin-none">Badges</h4>
+                <span *ngIf="badges;else badges_chargement">
+                    <div [class]="badge.bclass" *ngFor="let badge of badges" style="margin-top:5px; margin-right:20px;">
+                        <i [class]="badge.favicon"></i>
+                        <div style="font-size:12px; color:grey; line-height: 115%; margin-top:7px;">{{badge.text}}</div>
+                    </div>
+                </span>
+                <ng-template #badges_chargement>
+                    <div class="loader-small" style="margin: 20px;"></div>
+                </ng-template>
+            </div>
+        </div>
+
+        <br>
+        <div class="item">
+            <h4 class="text-headline margin-none">Smalt Online</h4>
+            <p class="text-subhead text-light">Vidéo de Présentation</p>
+            <div class="videoWrapper" style="position: relative;padding-bottom: 56.25%; padding-top: 25px;height: 0;">
+                <iframe style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;" width="560" height="349" src="https://www.youtube.com/embed/CswUCRSG7rY?rel=0&amp;controls=0&amp;showinfo=0"
+                    frameborder="0" allow="autoplay; encrypted-media"></iframe>
+            </div>
+            <div class="list-group relative paper-shadow" data-hover-z="0.5" data-animated>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Fin partie droite -->
+
+
+
+
+</div>

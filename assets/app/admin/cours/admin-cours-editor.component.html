@@ -1,0 +1,204 @@
+<div class="page-header">
+    <h1>Edition du cours {{cours?.titre}}</h1>
+</div>
+
+
+<div class="jumbotron">
+
+    <div class="row">
+        <a class="btn btn-primary">Apperçu</a>
+        <h2>Infos du cours</h2>
+        <br>
+        <h4>ID : {{cours?.coursID}}</h4>
+        <form (ngSubmit)="onUpdateCours(updateCoursForm)" #updateCoursForm="ngForm">
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Nom du cours</th>
+                        <th scope="col">Lien du cours</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <input type="text" id="titre" class="form-control" [ngModel]="cours?.titre" name="titre">
+                        </td>
+                        <td>
+                            <input type="text" id="lien" class="form-control" [ngModel]="cours?.lien" name="lien">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="form-group">
+                <label for="description">Description (html)</label>
+                <textarea class="form-control" id="description" rows="4" name="description" style="height:70px" [ngModel]="cours?.description"></textarea>
+            </div>
+            <button class="btn btn-primary" type="submit">Valider Les changements</button>
+            <div id="validationOK" style="font-size:20px; color:red">&nbsp;</div>
+        </form>
+    </div>
+    <br>
+    <br>
+    <hr/>
+
+    <div class="row">
+        <h2>Chapitres du cours</h2>
+        <p>Recharger la page si l'ordre (numéros des chapitres et sous chapitres) a été changé</p>
+        <div id="changesOK" style="font-size:20px; color:red">&nbsp;</div>
+        <div class="row" *ngFor="let chapitre of cours?.chapitres" style="margin-left:50px">
+            <div (click)="onToggle(chapitre)" style="cursor: pointer; margin-bottom:-20px; margin-top: 35px; font-size:15px; font-weight: bold; color:darkblue">
+                <span [id]="chapitre.titre+'arrow'">
+                    <i class="fa fa-arrow-right fa-fw"></i>
+                </span>{{chapitre?.titre}}</div>
+            <div [id]="chapitre.titre" style="display: none; margin-top:10px">
+                <form (ngSubmit)="onEditChapitre(editChapitreForm, chapitre)" #editChapitreForm="ngForm">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col" width="30%">Nom du chapitre</th>
+                                <th scope="col" width="10%">N° du chapitre</th>
+                                <th scope="col">Description du chapitre (html)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <input type="text" id="titre" class="form-control" [ngModel]="chapitre?.titre" name="titre">
+                                </td>
+                                <td>
+                                    <input type="number" id="numero" class="form-control" [ngModel]="chapitre?.numero" name="numero">
+                                </td>
+                                <td>
+                                    <input type="text" id="description" class="form-control" [ngModel]="chapitre?.description" name="description">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button class="btn btn-primary" type="submit">Editer Chapitre</button>
+                    <a class="btn btn-primary" (click)="onDeleteChapitre(chapitre)">Supprimer Chapitre</a>
+                </form>
+                <!-- Sous chapitres -->
+                <div class="row" style="margin-left:20px;">
+                    <br>
+                    <p style="font-weight:bold;">Sous-chapitres</p>
+                    <div id="changesSousChapitreOK" style="font-size:20px; color:red"></div>
+                    <div class="row" *ngFor="let souschapitre of chapitre?.sousChapitres" style="margin-left:50px; margin-top:-30px">
+                        <div (click)="onToggle(souschapitre)" style="cursor: pointer; margin-top: 35px; font-size:15px; font-weight: bold; color:green">
+                            <span [id]="souschapitre.titre+'arrow'">
+                                <i class="fa fa-arrow-right fa-fw"></i>
+                            </span>{{souschapitre?.titre}}</div>
+                        <div [id]="souschapitre.titre" style="display: none">
+                            <form (ngSubmit)="onEditSousChapitre(editSousChapitreForm, souschapitre)" #editSousChapitreForm="ngForm">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" width="30%">Nom du sous chapitre</th>
+                                            <th scope="col" width="10%">N° du sous chapitre</th>
+                                            <th scope="col">Description du sous chapitre (html)</th>
+                                            <th scope="col">Video du sous chapitre</th>
+                                            <th scope="col">Duree</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <input type="text" id="titre" class="form-control" [ngModel]="souschapitre?.titre" name="titre">
+                                            </td>
+                                            <td>
+                                                <input type="number" id="numero" class="form-control" [ngModel]="souschapitre?.numero" name="numero">
+                                            </td>
+                                            <td>
+                                                <input type="text" id="texte" class="form-control" [ngModel]="souschapitre?.texte" name="texte">
+                                            </td>
+                                            <td>
+                                                <input type="text" id="video" class="form-control" [ngModel]="souschapitre?.video" name="video">
+                                            </td>
+                                            <td>
+                                                <input type="text" id="duree" class="form-control" [ngModel]="souschapitre?.duree" name="duree">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <button class="btn btn-primary" type="submit">Editer Sous Chapitre</button>
+                                <a class="btn btn-primary" (click)="onDeleteSousChapitre(chapitre, souschapitre)">Supprimer Sous Chapitre</a>
+                            </form>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+                    <div class="row">
+                        <h4>Ajouter un sous-chapitre</h4>
+                        <!-- Ajout du sous chapitre -->
+                        <form (ngSubmit)="onAddSousChapitre(addSousChapitreForm, chapitre)" #addSousChapitreForm="ngForm">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Nom du sous chapitre</th>
+                                        <th scope="col">Numéro du sous chapitre</th>
+                                        <th scope="col">Lien vidéo</th>
+                                        <th scope="col">Duree vidéo</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <input type="text" id="titre" class="form-control" [ngModel]="souschapitre?.titre" name="titre">
+                                        </td>
+                                        <td>
+                                            <input type="number" id="numero" class="form-control" [ngModel]="souschapitre?.numero" name="numero">
+                                        </td>
+                                        <td>
+                                            <input type="text" id="video" class="form-control" [ngModel]="souschapitre?.video" name="video">
+                                        </td>
+                                        <td>
+                                            <input type="text" id="duree" class="form-control" [ngModel]="souschapitre?.duree" name="duree">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="form-group">
+                                <label for="texte">Texte du sous chapitre (html)</label>
+                                <textarea class="form-control" id="texte" rows="4" name="texte" style="height:70px" [ngModel]="souschapitre?.texte"></textarea>
+                            </div>
+                            <button class="btn btn-success" type="submit">Ajouter Sous Chapitre</button>
+                        </form>
+                        <!-- Fin du sous chapitre -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <div class="row">
+            <h4>Ajouter un chapitre</h4>
+            <form (ngSubmit)="onAddChapitre(addChapitreForm)" #addChapitreForm="ngForm">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nom du chapitre</th>
+                            <th scope="col">Numéro du chapitre</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <input type="text" id="titre" class="form-control" [ngModel]="chapitre?.titre" name="titre">
+                            </td>
+                            <td>
+                                <input type="number" id="numero" class="form-control" [ngModel]="chapitre?.numero" name="numero">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="form-group">
+                    <label for="description">Description (html)</label>
+                    <textarea class="form-control" id="description" rows="4" name="description" style="height:70px" [ngModel]="chapitre?.description"></textarea>
+                </div>
+                <button class="btn btn-primary" type="submit">Ajouter Chapitre</button>
+            </form>
+        </div>
+    </div>
+</div>

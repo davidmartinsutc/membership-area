@@ -1,0 +1,60 @@
+<div class="page-section" style="margin-bottom:-40px;">
+  <div class="media v-middle">
+    <div class="media-body">
+      <h1 class="text-display-1 margin-none">Contact</h1>
+      <br/>
+      <p style="font-size: 15px;">Vos Questions, Vos Remarques, Vos Suggestions !</p>
+    </div>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-sm-9">
+
+    <!-- Debut des produits -->
+    <div style="height:36px;"></div>
+    <div class="row" data-toggle="isotope">
+      <div class="item col-xs-12 col-lg-12">
+        <form [formGroup]="messageForm" (ngSubmit)="sendMessage()">
+
+          <textarea type="text" id="message" class="form-control" rows="7" formControlName="message"></textarea><br>
+          <div style="text-align:center;"><button style="width:40%;" class="btn btn-primary" type="submit">Envoyer !</button></div>
+        </form>
+        <br><br><br>
+        <div id="sended" style="text-align:center; color:darkgreen;font-size:20px; display:none">Merci ! Votre message à bien été envoyé !</div>
+      </div>
+
+    </div>
+
+
+  </div>
+
+
+
+  <div class="col-sm-3">
+    <!-- .panel -->
+    <div class="panel panel-default paper-shadow" data-z="0.5" data-hover-z="1" data-animated style="margin-top:36px;">
+      <div class="panel-body">
+        <h6 class="text-headline">Informations</h6>
+      </div>
+      <ul class="list-group">
+        <li class="list-group-item">
+          <div class="media v-middle">
+            <div class="media-left">
+              <div class="icon-block" style="width: 40px; height: 60px;line-height: 60px; font-size: 30px;">
+                <i class="fa fa-quora" aria-hidden="true"></i>
+              </div>
+            </div>
+            <div class="media-body" style="font-size:12px">
+              <strong>Vous pouvez nous contacter par email :</strong> membre@smaltonline.com
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <!-- // END .panel -->
+  </div>
+
+
+</div>

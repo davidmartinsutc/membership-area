@@ -1,0 +1,120 @@
+<div class="page-header">
+  <h1>Coup de coeur</h1>
+</div>
+
+
+<div class="jumbotron">
+
+  <div class="row">
+    <h2>Ajouter un Coup de coeur</h2>
+    <br>
+
+    <button (click)="showAddCoupdecoeur()">Ajouter Coup de coeur</button>
+    <div id="addProductDiv" style="display:none">
+      <form (ngSubmit)="onSubmit(addCoupdecoeurForm)" #addCoupdecoeurForm="ngForm">
+
+        <br>
+        <div class="form-group">
+          <label for="name">Nom</label>
+          <input type="text" class="form-control" id="name" placeholder="Nom du coupdecoeur" [ngModel]="mycoupdecoeur?.name" name="name">
+        </div>
+
+        <div class="form-group">
+          <label for="SecondTitle">Second Titre</label>
+          <input type="text" class="form-control" id="SecondTitle" placeholder="Sous titre" [ngModel]="mycoupdecoeur?.second_title"
+            name="second_title">
+        </div>
+        <div class="form-group">
+          <label for="LinkToaff">Lien affiliation</label>
+          <input type="text" class="form-control" id="LinkToaff" placeholder="Lien vers le produit ou formation" [ngModel]="mycoupdecoeur?.link_to_aff"
+            name="link_to_aff">
+        </div>
+        <div class="form-group">
+          <label for="LinkTonoaff">Lien sans affiliation</label>
+          <input type="text" class="form-control" id="LinkTonoaff" placeholder="Lien vers le produit ou formation" [ngModel]="mycoupdecoeur?.link_to_noaff"
+            name="link_to_noaff">
+        </div>
+        <div class="form-group">
+          <input type="hidden" class="form-control" id="oldCoupdecoeurName" placeholder="Nom du coupdecoeur" [ngModel]="mycoupdecoeur?.name" name="oldCoupdecoeurName">
+        </div>
+        <div class="form-group">
+          <label for="Picture">Image</label>
+          <input type="file" ngModel class="form-control-file" id="Picture" name="picture" (change)="fileChanged($event)">
+        </div>
+        <div class="form-group">
+          <label for="Description">Description </label>
+          <textarea class="form-control" id="Description" rows="3" [ngModel]="mycoupdecoeur?.description" name="description"
+            style="height:300px"></textarea>
+        </div>
+
+
+
+        <div class="form-group">
+          <label for="Video">Lien Vidéo Présentation</label>
+          <input type="text" id="Video" class="form-control" [ngModel]="mycoupdecoeur?.video" name="video">
+        </div>
+
+        <br>
+        <label for="exampleFormControlTextarea1">Sections</label>
+        <br>
+        <span *ngFor="let section of mycoupdecoeur?.sections">{{section?.sectionName}}, </span>
+        <div *ngFor="let section of sections">
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="{{section.sectionName}}" value="{{section.sectionName}}" (change)="addInSection(section)">
+            <label class="form-check-label" for="{{section.sectionName}}">{{section.sectionName}}</label>
+          </div>
+        </div>
+        <br>
+
+        <button class="btn btn-primary" type="submit">Submit</button>
+      </form>
+    </div>
+
+  </div>
+
+
+
+  <div class="row">
+    <h2>Liste des Coups de coeur</h2>
+    <br>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Nom</th>
+          <th scope="col">Description</th>
+          <th scope="col">CC ID</th>
+          <th scope="col">Image</th>
+          <th scope="col">Section</th>
+          <th scope="col">Preview</th>
+          <th scope="col">Delete</th>
+          <th scope="col">Edit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let coupdecoeur of coupdecoeurs">
+          <td>{{coupdecoeur.name}}</td>
+          <td>{{coupdecoeur.description}}</td>
+          <td>{{coupdecoeur.coupdecoeurID}}</td>
+          <td>{{coupdecoeur.picture}}</td>
+          <td>
+            <span *ngFor="let section of coupdecoeur.sections">{{section.sectionName}}, </span>
+          </td>
+          <td>
+            <a [routerLink]="['/coupdecoeur/'+coupdecoeur.name]" class="btn btn-primary">Preview</a>
+          </td>
+          <td>
+            <a class="btn btn-primary" (click)="onDelete(coupdecoeur)">Delete</a>
+          </td>
+          <td>
+            <a class="btn btn-primary" (click)="onEdit(coupdecoeur)">Edit</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+
+  </div>
+  <br>
+  <br>
+</div>

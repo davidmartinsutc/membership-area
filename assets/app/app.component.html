@@ -1,0 +1,5 @@
+<app-auth *ngIf="!userIsLogged()"></app-auth>
+
+<app-home *ngIf="userIsLogged()"></app-home>
+
+<app-error></app-error>

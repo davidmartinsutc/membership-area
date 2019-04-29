@@ -1,0 +1,48 @@
+<div class="page-header">
+  <h1>Gestionnaire de Licences</h1>
+</div>
+
+
+<div class="jumbotron">
+
+  <div class="row">
+    <h2>Liste des Logiciels</h2>
+    <br>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Position</th>
+          <th scope="col">Nom Produit</th>
+          <th scope="col">Section</th>
+          <th scope="col">Prix</th>
+          <th scope="col">Active</th>
+          <th scope="col">Preview</th>
+          <th scope="col">Uploader des Licences</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products">
+          <td>{{product.position}}</td>
+          <td>{{product.name}}</td>
+          <td>
+            <span *ngFor="let section of product.sections">{{section.sectionName}}, </span>
+          </td>
+          <td>{{product.price}}</td>
+          <td>{{product.activated}}</td>
+          <td>
+            <a [routerLink]="['/trainings/'+product.name]" class="btn btn-primary">Preview</a>
+          </td>
+          <td>
+            <a class="btn btn-primary" (click)="uploadLicence(product)">Uploader</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+
+  </div>
+  <br>
+  <br>
+</div>
+<app-modalbox-licences></app-modalbox-licences>

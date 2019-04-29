@@ -1,0 +1,240 @@
+<div class="page-header">
+  <h1>Logiciels</h1>
+</div>
+
+
+<div class="jumbotron">
+
+  <div class="row">
+    <h2>Ajouter un Produit</h2>
+    <br>
+
+    <button (click)="showAddProduct()">Ajouter Produit</button>
+    <div id="addProductDiv" style="display:none">
+      <form (ngSubmit)="onSubmit(addProductForm)" #addProductForm="ngForm">
+
+        <br>
+        <div class="form-group">
+          <label for="productName">Nom</label>
+          <input type="text" class="form-control" id="productName" placeholder="Nom du Produit" [ngModel]="myproduct?.name" name="name">
+        </div>
+        <div class="form-group">
+          <label for="productName">Favicon Nom</label>
+          <input type="text" class="form-control" id="productFaTitle" placeholder="Favicon du Produit" [ngModel]="myproduct?.fa_title"
+            name="fa_title">
+        </div>
+        <div class="form-group">
+          <label for="productSecondTitle">Second Titre</label>
+          <input type="text" class="form-control" id="productSecondTitle" placeholder="Sous titre du Produit" [ngModel]="myproduct?.second_title"
+            name="secondTitle">
+        </div>
+        <div class="form-group">
+          <label for="productLinkTo">Lien vers le produit / formation (Accès ou Telechargement)</label>
+          <input type="text" class="form-control" id="productLinkTo" placeholder="Lien vers le produit ou formation" [ngModel]="myproduct?.link_to"
+            name="link_to">
+        </div>
+        <div class="form-group">
+          <input type="hidden" class="form-control" id="oldProductName" placeholder="Nom du Produit" [ngModel]="myproduct?.name" name="oldProductName">
+        </div>
+        <div class="form-group">
+          <label for="productPicture">Image</label>
+          <input type="file" ngModel class="form-control-file" id="productPicture" name="productPicture" (change)="fileChanged($event)">
+        </div>
+        <div class="form-group">
+          <label for="productDescriptionPreview">Description apperçu</label>
+          <textarea class="form-control" id="productDescriptionPreview" rows="3" [ngModel]="myproduct?.description_preview" name="description_preview"
+            style="height:300px"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="productDescriptionDetail">Description detaillée</label>
+          <textarea class="form-control" id="productDescriptionDetail" rows="3" [ngModel]="myproduct?.description_detail" name="description_detail"
+            style="height:300px"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="productBenefits">Bénéfices detaillés</label>
+          <!-- Sample du format -->
+
+          <pre><code> 
+              &lt;li&gt;
+                  &lt;div class="media v-middle"&gt;
+                      &lt;div class="media-left"&gt;
+                          &lt;div class="icon-block s30 bg-red-300 text-white img-circle"&gt;
+                              &lt;i class="fa fa-star"&gt;&lt;/i&gt;
+                          &lt;/div&gt;
+                      &lt;/div&gt;
+                      &lt;div class="media-body text-body-2"&gt;
+                          Basics of GIT and how to become a STAR.
+                      &lt;/div&gt;
+                  &lt;/div&gt;
+              &lt;/li&gt;
+              &lt;br/&gt;
+
+          </code> </pre>
+          <textarea class="form-control" id="productBenefits" rows="3" [ngModel]="myproduct?.benefits_detail" name="benefits_detail"
+            style="height:300px"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="productPosition">Position</label>
+          <input type="text" id="productPosition" class="form-control" [ngModel]="myproduct?.position" name="position">
+        </div>
+
+        <!-- 13/02 -->
+        <div class="form-group">
+          <label for="productPrice">Price</label>
+          <input type="number" id="productPrice" class="form-control" [ngModel]="myproduct?.price" name="price">
+        </div>
+
+        <div class="form-group">
+          <label for="productValue">Valeur</label>
+          <input type="number" id="productValue" class="form-control" [ngModel]="myproduct?.value" name="value">
+        </div>
+
+        <div class="form-group">
+          <label for="productVideo">Lien Vidéo Présentation (affichage sur la page du produit)</label>
+          <input type="text" id="productVideo" class="form-control" [ngModel]="myproduct?.video" name="video">
+        </div>
+
+        <div class="form-group">
+            <label for="productIframelink">Lien de l'iframe a inclure</label>
+            <input type="text" id="productIframelink" class="form-control" [ngModel]="myproduct?.iframelink" name="iframelink">
+          </div>
+
+        <div class="form-group">
+          <input type="hidden" id="productDuree" class="form-control" [ngModel]="myproduct?.duree" name="temps">
+        </div>
+
+        <div class="form-group">
+          <label for="productMaj">Dernière mise a jour</label>
+          <input type="date" id="productMaj" class="form-control" [ngModel]="myproduct?.maj" name="maj">
+        </div>
+
+
+        <div class="form-group">
+          <label for="formationProduit">Lien (ID) de la formation sur ce produit</label>
+          <input type="text" id="formationProduit" class="form-control" [ngModel]="myproduct?.formationProduit" name="formationProduit">
+        </div>
+
+        <div class="form-group">
+          <label for="downloadableBonus">Lien (ID) de la page de Bonus Téléchargeables</label>
+          <input type="text" id="downloadableBonus" class="form-control" [ngModel]="myproduct?.downloadableBonus" name="downloadableBonus">
+        </div>
+
+
+        <label for="exampleFormControlTextarea1">Formations Liées (pourrait interesser le client)</label>
+        <br>
+        <span *ngFor="let training of myproduct?.linked_trainings">{{training.name}}, </span>
+
+        <div *ngFor="let training of linkedTrainings">
+          <div class="form-check form-check-inline" *ngIf="training.name != myproduct?.name">
+            <input class="form-check-input" type="checkbox" id="{{training.name}}" value="{{training.name}}" (change)="addInLinkedTraining(training)">
+            <label class="form-check-label" for="{{training.name}}">{{training.name}}</label>
+          </div>
+        </div>
+        <br>
+
+
+        <label for="exampleFormControlTextarea1">Logiciels Liés (pourrait interesser le client)</label>
+        <br>
+        <span *ngFor="let product of myproduct?.linked_products">{{product?.name}}, </span>
+        <div *ngFor="let product of linkedProducts">
+          <div class="form-check form-check-inline" *ngIf="product.name != myproduct?.name">
+            <input class="form-check-input" type="checkbox" id="{{product.name}}" value="{{product.name}}" (change)="addInLinkedProduct(product)">
+            <label class="form-check-label" for="{{product.name}}">{{product?.name}}</label>
+          </div>
+        </div>
+
+        <br>
+        <div class="form-group">
+          <label for="productPosition">Activated</label>
+          <select class="form-control" name="activated" [ngModel]="myproduct?.activated">
+            <option value="true">True</option>
+            <option value="false">False</option>
+          </select>
+        </div>
+
+        <p>Si un produit est desactivé, ne pas le mettre dans une section (pour l'affichage)</p>
+        <label for="exampleFormControlTextarea1">Sections</label>
+        <br>
+        <span *ngFor="let section of myproduct?.sections">{{section?.sectionName}}, </span>
+        <div *ngFor="let section of sections">
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="{{section.sectionName}}" value="{{section.sectionName}}" (change)="addInSection(section)">
+            <label class="form-check-label" for="{{section.sectionName}}">{{section.sectionName}}</label>
+          </div>
+        </div>
+        <br>
+
+
+        <div style=" border-width:1px; border-style:dotted; border-color:darkred;">
+          <label for="exampleFormControlTextarea1">Formations Offertes</label>
+          <br>
+          <span *ngFor="let training of myproduct?.offered_trainings" style="color:darkred">{{training.name}} &nbsp;,&nbsp;&nbsp;&nbsp;</span>
+
+          <div *ngFor="let training of offeredTrainings">
+            <div class="form-check form-check-inline" *ngIf="training.name != myproduct?.name">
+              <input class="form-check-input" type="checkbox" id="{{training.name}}offert" value="{{training.name}}" (change)="addInOfferedTraining(training)">
+              <label class="form-check-label" for="{{training.name}}offert">{{training.name}}</label>
+            </div>
+          </div>
+        </div>
+        <br>
+
+        <button class="btn btn-primary" type="submit">Submit</button>
+      </form>
+    </div>
+
+  </div>
+
+
+
+  <div class="row">
+    <h2>Liste des Logiciels</h2>
+    <br>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Position</th>
+          <th scope="col">Nom Produit</th>
+          <th scope="col">Description Preview</th>
+          <th scope="col">Product ID</th>
+          <th scope="col">Image</th>
+          <th scope="col">Section</th>
+          <th scope="col">Prix</th>
+          <th scope="col">Active</th>
+          <th scope="col">Preview</th>
+          <th scope="col">Delete</th>
+          <th scope="col">Edit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products">
+          <td>{{product.position}}</td>
+          <td>{{product.name}}</td>
+          <td>{{product.description_preview}}</td>
+          <td>{{product.productID}}</td>
+          <td>{{product.picture}}</td>
+          <td>
+            <span *ngFor="let section of product.sections">{{section.sectionName}}, </span>
+          </td>
+          <td>{{product.price}}</td>
+          <td>{{product.activated}}</td>
+          <td>
+            <a [routerLink]="['/trainings/'+product.name]" class="btn btn-primary">Preview</a>
+          </td>
+          <td>
+            <a class="btn btn-primary" (click)="onDelete(product)">Delete</a>
+          </td>
+          <td>
+            <a class="btn btn-primary" (click)="onEdit(product)">Edit</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+
+  </div>
+  <br>
+  <br>
+</div>

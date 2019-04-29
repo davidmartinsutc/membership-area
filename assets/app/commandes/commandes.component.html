@@ -1,0 +1,42 @@
+<div class="page-header">
+    <h1>Gestionnaire de Commandes</h1>
+  </div>
+  
+  
+  <div class="jumbotron">
+  
+    <div class="row">
+      <h2>Liste des Commandes</h2>
+      <br>
+  
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">User Email</th>
+            <th scope="col">User Name</th>
+            <th scope="col">Product</th>
+            <th scope="col">Date</th>
+            <th scope="col">Traite</th>
+            <th scope="col">Valider</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let commande of commandes">
+            <td>{{commande.user.email}}</td>
+            <td>{{commande.user.firstName}} {{commande.user.lastName}}</td>
+            <td>
+              <span *ngFor="let product of commande.products"><a target="_blank" [href]="product.link_to">{{product.name}}</a><br> </span>
+            </td>
+            <td>{{commande.date}}</td>
+            <td>{{commande.traite}}</td>
+            <td><i *ngIf="commande.traite == false" class="fa fa-plus-circle" (click)="validateCommande(commande)"></i></td>
+          </tr>
+        </tbody>
+      </table>
+  
+  
+    </div>
+    <br>
+    <br>
+  </div>
+  

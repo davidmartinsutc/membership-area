@@ -1,0 +1,48 @@
+<style>
+        .table>tbody>tr>td,
+        .table>tbody>tr>th {
+                border-top: none;
+                padding-bottom: 1em;
+        }
+
+ 
+</style>
+
+<table class="table">
+        <tbody>
+        <tr>
+            <th class="col-md-6" scope="row">eMail</th>
+            <td class="col-md-6" >{{myuser?.email}}</td>
+        </tr>
+        <tr>
+            <th class="col-md-6" scope="row">Prénom</th>
+            <td class="col-md-6">{{myuser?.firstName}} </td>
+        </tr>
+        <tr>
+            <th class="col-md-6" scope="row">Nom</th>
+            <td class="col-md-6">{{myuser?.lastName}}</td>
+        </tr>
+        <tr>
+            <th class="col-md-6" scope="row">Téléphone</th>
+            <td class="col-md-6" >{{myuser?.phone}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Date de Naissance</th>
+            <td>{{myuser?.birthDate.toLocaleString("en-GB", {year: "numeric", month: "numeric", day: "numeric"})}}</td>
+        </tr>
+        </tbody>
+</table>
+<br> <br> <br>
+<table class="table">
+        <tbody>
+        <tr>
+            <th class="col-md-6" scope="row">Mot de Passe</th>
+            <td class="col-md-6" >**********</td>
+        </tr>
+        </tbody>
+</table>
+<a class="btn btn-primary" [routerLink]="['../modif']">Modifier</a>
+
+
+
+

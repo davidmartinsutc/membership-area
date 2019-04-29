@@ -1,0 +1,132 @@
+<style>
+  .centertext {
+    text-align: center;
+    padding-right: 9%;
+  }
+</style>
+
+
+
+<div class="page-section centertext">
+  <h1 class="text-display-2">Hello {{myuser?.firstName}} !</h1>
+  <br/>
+  <br/>
+  <p style="font-size: 22px; font-style: oblique;">{{quotes[quoteNb].quote}}</p>
+  <p style="font-size: 16px; font-style: oblique;">{{quotes[quoteNb].author}}</p>
+  <br/>
+</div>
+
+
+<div class="row" data-toggle="isotope">
+  <div class="col-lg-1"></div>
+
+
+  <div class="item col-xs-12 col-sm-6 col-lg-4">
+    <div class="panel panel-default paper-shadow" data-z="0.5">
+
+      <div class="cover overlay cover-image-full hover">
+        <span class="img icon-block height-250 bg-primary"></span>
+        <a [routerLink]="['/products']" class="padding-none overlay overlay-full icon-block bg-primary height-150">
+          <span class="v-center">
+            <img src='/images/rocket-launch-computer.png'>
+          </span>
+        </a>
+
+
+      </div>
+
+      <div class="panel-body">
+        <h4 class="text-headline margin-v-0-10">
+          <a [routerLink]="['/products']">Logiciels et Formations aux Logiciels</a>
+        </h4>
+      </div>
+
+      <hr class="margin-none" />
+      <div class="panel-body">
+        <p>
+          Logiciels et Outils Smalt Online
+          <br> Formations Prise en Main & Stratégies
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="col-lg-1"></div>
+
+
+
+
+  <div class="item col-xs-12 col-sm-6 col-lg-4">
+    <div class="panel panel-default paper-shadow" data-z="0.5">
+
+      <div class="cover overlay cover-image-full hover">
+        <span class="img icon-block height-250 bg-primary"></span>
+        <a [routerLink]="['/membre/dashboard']" class="padding-none overlay overlay-full icon-block bg-primary height-150">
+          <span class="v-center">
+            <img src='/images/dashboard.png'>
+          </span>
+        </a>
+
+
+
+      </div>
+
+      <div class="panel-body">
+        <h4 class="text-headline margin-v-0-10">
+          <a [routerLink]="['/membre/dashboard']">Mon Tableau de Bord</a>
+        </h4>
+
+      </div>
+      <hr class="margin-none" />
+      <div class="panel-body">
+        <p>
+          Vos Produits et Formations
+          <br> Bonus de l'Espace Membre
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!--
+  <div class="item col-xs-12 col-sm-6 col-lg-4">
+    <div class="panel panel-default paper-shadow" data-z="0.5">
+
+      <div class="cover overlay cover-image-full hover">
+        <span class="img icon-block height-250 bg-lightred"></span>
+        <a [routerLink]="['/trainings']" class="padding-none overlay overlay-full icon-block bg-lightred height-150">
+          <span class="v-center">
+            <img src='/images/training.png'>
+          </span>
+        </a>
+
+
+
+      </div>
+
+      <div class="panel-body">
+        <h4 class="text-headline margin-v-0-10">
+          <a [routerLink]="['/trainings']">Formations Marketing Digital</a>
+        </h4>
+
+      </div>
+      <hr class="margin-none" />
+      <div class="panel-body">
+        <p>
+          Formations sur les Outils du marché
+          <br> Formations Gratuites de Marketing Digital
+        </p>
+      </div>
+
+    </div>
+  </div>
+-->
+
+
+
+
+</div>
+

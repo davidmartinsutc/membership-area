@@ -1,0 +1,110 @@
+<div class="page-header">
+    <h1>Users</h1>
+</div>
+
+
+<div class="jumbotron">
+
+    <div class="row">
+        <div class="well">
+            <h2>Statistiques</h2>
+            Nombre Utilisateurs
+        </div>
+    </div>
+
+    <div class="row">
+        <h2>Ajouter Utilisateur</h2>
+        <br>
+        <form [formGroup]="addUserForm" (ngSubmit)="onSubmit()">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Mail</th>
+                        <th scope="col">Prenom</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Mot de Passe</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">BirthDate</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <input type="text" id="email" class="form-control" formControlName="email">
+                        </td>
+                        <td>
+                            <input type="text" id="firstName" class="form-control" formControlName="firstName">
+                        </td>
+                        <td>
+                            <input type="text" id="lastName" class="form-control" formControlName="lastName">
+                        </td>
+                        <td>
+                            <input type="text" id="password" class="form-control" formControlName="password">
+                        </td>
+                        <td>
+                            <input type="text" id="phone" class="form-control" formControlName="phone">
+                        </td>
+                        <td>
+                            <input type="date" id="birthdate" class="form-control" formControlName="birthdate">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="btn btn-primary" type="submit" [disabled]="!addUserForm.valid">Submit</button>
+        </form>
+    </div>
+
+    <br>
+    <div class="row">
+        <h2>Liste des Utilisateurs</h2>
+        <br>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Mail</th>
+                    <th scope="col">Prenom</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Telephone</th>
+                    <th scope="col">BirthDate</th>
+                    <th scope="col">Delete</th>
+                    <th scope="col">SendMail</th>
+                    <th scope="col">Ajouter Produit</th>
+                    <th scope="col">Ajouter Formation</th>
+                    <th scope="col">Ajouter Admin</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of users">
+                    <td>{{user.email}}</td>
+                    <td>{{user.firstName}}</td>
+                    <td>{{user.lastName}}</td>
+                    <td>{{user.phone}}</td>
+                    <td>{{user.birthDate}}</td>
+                    <td>
+                        <a class="btn btn-primary" (click)="userDelete(user)">Delete</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-primary">Send Mail</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" (click)="onAddProduct(user)">+ Produit</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" (click)="onAddTraining(user)">+ Formation</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" (click)="onAddAdmin(user)">+ Admin {{user.proxy}}</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <a class="btn btn-primary">Exporter vers csv</a>
+
+    </div>
+    <br>
+    <br>
+</div>
+
+
+<app-modalbox></app-modalbox>

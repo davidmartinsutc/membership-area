@@ -1,0 +1,48 @@
+<div class="media media-grid media-clearfix-xs" *ngIf="coupdecoeur">
+    <div class="media-body">
+
+        <div class="page-section">
+            <div class="row">
+                <div class="item col-xs-12 col-lg-12">
+                    <div style="width:60%; margin:auto; display:float; padding-right:40px">
+                        <div style="text-align:center">
+                            <h1 class="text-display-1 margin-none">{{coupdecoeur?.name}}</h1>
+                            <p class="margin-none">
+                                {{coupdecoeur?.second_title}}
+                            </p>
+
+                            <br>
+                            <br>
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <div *ngIf="coupdecoeur?.video != '' && coupdecoeur?.video;else other_content">
+                                    <iframe [src]="coupdecoeur?.video | safe" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen"
+                                        oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen"></iframe>
+                                </div>
+                                <ng-template #other_content>
+                                    <img [src]="coupdecoeur?.picture" style="height:320px">
+                                </ng-template>
+                            </div>
+                            <br>
+                            <br>
+                            <div innerHTML="{{coupdecoeur?.description}}"></div>
+                            <br>
+                            <br>
+                        </div>
+                        <div class="row">
+                                <div class="col-xs-12 col-lg-6" style="text-align:center"><a target="_" [href]="coupdecoeur.link_to_aff"><strong>Voir la Page du Produit</strong><br>(Affiliation)</a></div>
+                                <div class="col-xs-12 col-lg-6" style="text-align:center"><a target="_" [href]="coupdecoeur.link_to_noaff"><strong>Voir la Page du Produit</strong><br>(Sans Affiliation)</a></div>
+                            </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+
+
+
+    </div>
+</div>
+<!-- /.modal -->
+<!-- Fin à l'espace membre -->

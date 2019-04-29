@@ -1,0 +1,69 @@
+<style>
+        .table>tbody>tr>td,
+        .table>tbody>tr>th {
+                border-top: none;
+                padding-bottom: 1em;
+        }
+</style>
+
+<form [formGroup]="infoForm" (ngSubmit)="onSubmitInfo()">
+
+<table class="table">
+        <tbody>
+        <tr>
+            <th class="col-md-6" scope="row">eMail</th>
+            <td class="col-md-6" >{{myuser?.email}}</td>
+        </tr>
+        <tr>
+            <th class="col-md-6" scope="row">Prénom</th>
+            <td class="col-md-6"><input type="text" id="firstName" class="form-control" formControlName="firstName" value={{myuser?.firstName}}></td>
+        </tr>
+        <tr>
+            <th class="col-md-6" scope="row">Nom</th>
+            <td class="col-md-6"><input type="text" id="lastName" class="form-control" formControlName="lastName" value="{{myuser?.lastName}}"></td>
+        </tr>
+        <tr>
+            <th class="col-md-6" scope="row">Téléphone</th>
+            <td class="col-md-6"><input type="text" id="phone" class="form-control" formControlName="phone" value="{{myuser?.phone}}"></td>
+        </tr>
+        <tr>
+            <th scope="row">Date de Naissance</th>
+            <td class="col-md-6"><input type="date" id="birthdate" class="form-control" formControlName="birthdate" value="{{myuser?.birthDate.toISOString().split('T')[0]}}"></td>
+        </tr>
+        </tbody>
+</table>
+<button
+        class="btn btn-primary"
+        type="submit"
+        [disabled]="!infoForm.valid">Valider</button>
+</form>
+
+<br><br><br><br>
+
+
+<form [formGroup]="mdpForm" (ngSubmit)="onSubmitMdp()">
+<table class="table">
+        <tbody>
+        <tr>
+            <th class="col-md-6" scope="row">Mot de Passe Actuel</th>
+            <td class="col-md-6"><input type="password" id="mdpActuel" class="form-control" formControlName="mdpActuel"></td>
+        </tr>
+        <tr>
+            <th class="col-md-6" scope="row">Nouveau Mot de Passe</th>
+            <td class="col-md-6"><input type="password" id="mdpNew" class="form-control" formControlName="mdpNew"></td>
+        </tr>
+        <tr>
+            <th class="col-md-6" scope="row">Retapez le Mot de Passe</th>
+            <td class="col-md-6"><input type="password" id="mdpValidation" class="form-control" formControlName="mdpValidation" (keyup)="checkPass()"></td>
+        </tr>
+        </tbody>
+</table>
+<button
+        class="btn btn-primary"
+        type="submit"
+        id="btnChangeMdp"
+        [disabled]="!mdpForm.valid">Valider</button>
+</form>
+
+<br><br><br>
+<a class="btn btn-primary" [routerLink]="['../display']">Annuler</a>

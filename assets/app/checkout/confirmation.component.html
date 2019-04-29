@@ -1,0 +1,193 @@
+<style>
+    .bs-wizard {
+        margin-top: 40px;
+    }
+
+    /*Form Wizard*/
+
+    .bs-wizard {
+        border-bottom: solid 1px #e0e0e0;
+        padding: 0 0 10px 0;
+    }
+
+    .bs-wizard>.bs-wizard-step {
+        padding: 0;
+        position: relative;
+    }
+
+    .bs-wizard>.bs-wizard-step .bs-wizard-stepnum {
+        color: #595959;
+        font-size: 16px;
+        margin-bottom: 5px;
+    }
+
+    .bs-wizard>.bs-wizard-step .bs-wizard-info {
+        color: #999;
+        font-size: 14px;
+    }
+
+    .bs-wizard>.bs-wizard-step>.bs-wizard-dot {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        display: block;
+        background: #7187ac;
+        top: 45px;
+        left: 50%;
+        margin-top: -15px;
+        margin-left: -15px;
+        border-radius: 50%;
+    }
+
+    .bs-wizard>.bs-wizard-step>.bs-wizard-dot:after {
+        content: ' ';
+        width: 14px;
+        height: 14px;
+        background: #5f7191;
+        border-radius: 50px;
+        position: absolute;
+        top: 8px;
+        left: 8px;
+    }
+
+    .bs-wizard>.bs-wizard-step>.progress {
+        position: relative;
+        border-radius: 0px;
+        height: 8px;
+        box-shadow: none;
+        margin: 20px 0;
+        background: rgb(230, 230, 230);
+    }
+
+    .bs-wizard>.bs-wizard-step>.progress>.progress-bar {
+        width: 0px;
+        box-shadow: none;
+        background: #7187ac;
+    }
+
+    .bs-wizard>.bs-wizard-step.complete>.progress>.progress-bar {
+        width: 100%;
+    }
+
+    .bs-wizard>.bs-wizard-step.active>.progress>.progress-bar {
+        width: 50%;
+    }
+
+    .bs-wizard>.bs-wizard-step:first-child.active>.progress>.progress-bar {
+        width: 0%;
+    }
+
+    .bs-wizard>.bs-wizard-step:last-child.active>.progress>.progress-bar {
+        width: 100%;
+    }
+
+    .bs-wizard>.bs-wizard-step.disabled>.bs-wizard-dot {
+        background-color: #F7F8FC;
+    }
+
+    .bs-wizard>.bs-wizard-step.disabled>.bs-wizard-dot:after {
+        opacity: 0;
+    }
+
+    .bs-wizard>.bs-wizard-step:first-child>.progress {
+        left: 50%;
+        width: 50%;
+    }
+
+    .bs-wizard>.bs-wizard-step:last-child>.progress {
+        width: 50%;
+    }
+
+    .bs-wizard>.bs-wizard-step.disabled a.bs-wizard-dot {
+        pointer-events: none;
+        background: rgb(230, 230, 230);
+    }
+
+    /*END Form Wizard*/
+</style>
+
+
+<div class="row">
+
+    <div class="col-sm-2">
+        <hr/> </div>
+
+    <div class="col-sm-7">
+
+        <div class="container" style="margin-left:-40px">
+
+            <div class="row bs-wizard" style="border-bottom:0;">
+                <div class="col-xs-3 bs-wizard-step complete">
+                    <div class="text-center bs-wizard-stepnum">&nbsp;</div>
+                    <div class="progress">
+                        <div class="progress-bar"></div>
+                    </div>
+                    <a class="bs-wizard-dot"></a>
+                    <div class="text-center bs-wizard-stepnum">Panier</div>
+                </div>
+
+                <div class="col-xs-3 bs-wizard-step complete">
+                    <!-- complete -->
+                    <div class="text-center bs-wizard-stepnum">&nbsp;</div>
+                    <div class="progress">
+                        <div class="progress-bar"></div>
+                    </div>
+                    <a class="bs-wizard-dot"></a>
+                    <div class="text-center bs-wizard-stepnum">Paiement</div>
+                </div>
+
+                <div class="col-xs-3 bs-wizard-step active">
+                    <!-- active -->
+                    <div class="text-center bs-wizard-stepnum">&nbsp;</div>
+                    <div class="progress">
+                        <div class="progress-bar"></div>
+                    </div>
+                    <a class="bs-wizard-dot"></a>
+                    <div class="text-center bs-wizard-stepnum">Confirmation</div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="tabbable paper-shadow relative" data-z="0.5" style="width:106%">
+            <div class="tab-content">
+                <div class="row">
+                    <h3 style="text-align:center">Merci de votre confiance</h3>
+                    <br>
+                    <span style="width:80px; display:block; margin:auto; font-size:60px;color:green;">
+                        <i class="fa fa-check fa-fw"></i>
+                    </span>
+                    <br>
+
+                    <div style="margin-left:50px">
+                        <p style="width:60%; display:block; margin:auto">
+                            Vos produits (Logiciels et Formations) sont visibles dans la section Membre.
+                            <br>
+                            <br> Les formations sont disponibles dès maintenant dans votre espace membre.
+                            <br>
+                            <br> Vous recevrez par email les identifiants permettant de vous connecter à vos logiciels. Cela
+                            peut prendre jusqu'à 24h.
+                        </p>
+                        <br>
+                        <br>
+                        <div style="margin-left:-40px">
+                            <a style="width:46%; margin:auto; display:block" class="btn btn-white paper-shadow relative" data-z="0.5" data-hover-z="1"
+                                data-animated [routerLink]="['/membre/dashboard']">
+                                Mon Tableau de Bord
+                            </a>
+                            <br>
+                            <br>
+                            <img src='/images/smaltonline-icon.png' style="width:95px; height:100px; display:block; margin:auto">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-3">
+        <hr/>
+    </div>
+</div>

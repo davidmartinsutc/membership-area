@@ -1,0 +1,207 @@
+<style>
+    .bs-wizard {
+        margin-top: 40px;
+    }
+
+    /*Form Wizard*/
+
+    .bs-wizard {
+        border-bottom: solid 1px #e0e0e0;
+        padding: 0 0 10px 0;
+    }
+
+    .bs-wizard>.bs-wizard-step {
+        padding: 0;
+        position: relative;
+    }
+
+    .bs-wizard>.bs-wizard-step .bs-wizard-stepnum {
+        color: #595959;
+        font-size: 16px;
+        margin-bottom: 5px;
+    }
+
+    .bs-wizard>.bs-wizard-step .bs-wizard-info {
+        color: #999;
+        font-size: 14px;
+    }
+
+    .bs-wizard>.bs-wizard-step>.bs-wizard-dot {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        display: block;
+        background: #7187ac;
+        top: 45px;
+        left: 50%;
+        margin-top: -15px;
+        margin-left: -15px;
+        border-radius: 50%;
+    }
+
+    .bs-wizard>.bs-wizard-step>.bs-wizard-dot:after {
+        content: ' ';
+        width: 14px;
+        height: 14px;
+        background: #5f7191;
+        border-radius: 50px;
+        position: absolute;
+        top: 8px;
+        left: 8px;
+    }
+
+    .bs-wizard>.bs-wizard-step>.progress {
+        position: relative;
+        border-radius: 0px;
+        height: 8px;
+        box-shadow: none;
+        margin: 20px 0;
+        background: rgb(230, 230, 230);
+    }
+
+    .bs-wizard>.bs-wizard-step>.progress>.progress-bar {
+        width: 0px;
+        box-shadow: none;
+        background: #7187ac;
+    }
+
+    .bs-wizard>.bs-wizard-step.complete>.progress>.progress-bar {
+        width: 100%;
+    }
+
+    .bs-wizard>.bs-wizard-step.active>.progress>.progress-bar {
+        width: 50%;
+    }
+
+    .bs-wizard>.bs-wizard-step:first-child.active>.progress>.progress-bar {
+        width: 0%;
+    }
+
+    .bs-wizard>.bs-wizard-step:last-child.active>.progress>.progress-bar {
+        width: 100%;
+    }
+
+    .bs-wizard>.bs-wizard-step.disabled>.bs-wizard-dot {
+        background-color: #F7F8FC;
+    }
+
+    .bs-wizard>.bs-wizard-step.disabled>.bs-wizard-dot:after {
+        opacity: 0;
+    }
+
+    .bs-wizard>.bs-wizard-step:first-child>.progress {
+        left: 50%;
+        width: 50%;
+    }
+
+    .bs-wizard>.bs-wizard-step:last-child>.progress {
+        width: 50%;
+    }
+
+    .bs-wizard>.bs-wizard-step.disabled a.bs-wizard-dot {
+        pointer-events: none;
+        background: rgb(230, 230, 230);
+    }
+
+    /*END Form Wizard*/
+</style>
+
+
+<div class="row" *ngIf='mycart'>
+    <div class="col-sm-2">
+        <hr/> </div>
+
+    <div class="col-sm-7">
+
+        <div class="container" style="margin-left:-40px">
+
+            <div class="row bs-wizard" style="border-bottom:0;">
+                <div class="col-xs-3 bs-wizard-step active">
+                    <div class="text-center bs-wizard-stepnum">&nbsp;</div>
+                    <div class="progress">
+                        <div class="progress-bar"></div>
+                    </div>
+                    <a class="bs-wizard-dot"></a>
+                    <div class="text-center bs-wizard-stepnum">Panier</div>
+                </div>
+
+                <div class="col-xs-3 bs-wizard-step disabled">
+                    <!-- complete -->
+                    <div class="text-center bs-wizard-stepnum">&nbsp;</div>
+                    <div class="progress">
+                        <div class="progress-bar"></div>
+                    </div>
+                    <a class="bs-wizard-dot"></a>
+                    <div class="text-center bs-wizard-stepnum">Paiement</div>
+                </div>
+
+                <div class="col-xs-3 bs-wizard-step disabled">
+                    <!-- active -->
+                    <div class="text-center bs-wizard-stepnum">&nbsp;</div>
+                    <div class="progress">
+                        <div class="progress-bar"></div>
+                    </div>
+                    <a class="bs-wizard-dot"></a>
+                    <div class="text-center bs-wizard-stepnum">Confirmation</div>
+                </div>
+            </div>
+        </div>
+        <br>
+
+
+        <div class="tabbable paper-shadow relative" data-z="0.5" style="width:106%; border-radius:5px;">
+            <div class="tab-content" style="border-radius:5px; background:#5f7191">
+                <div class="row">
+                    <div class="col-lg-2 col-sm-3 col-xs-3">
+                        <div style="font-size:20px; font-weight:bold;color:white">Produit</div>
+                    </div>
+
+                    <div class="col-lg-7 col-xs-2"></div>
+                    <div class="col-lg-2 col-xs-4">
+                        <div style="font-size:20px; font-weight:bold;color:white">Prix</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tabbable paper-shadow relative" data-z="0.5" style="width:106%; border-radius:5px;">
+            <div class="tab-content" style="border-radius:5px;">
+                <div class="row">
+                    <div *ngFor="let product of mycart.products" style="height:80px; padding-top:10px">
+                        <div class="col-xs-2 col-lg-2 col-sm-2 hidden-xs">
+                            <div>
+                                <img style="width:85px; height:70px" [src]="product.picture">
+                            </div>
+                        </div>
+                        <div style="padding-top:30px">
+                            <div class="col-xs-7 col-lg-7 col-sm-6">&nbsp;&nbsp;&nbsp;&nbsp;{{product?.name}}</div>
+                            <div class="col-xs-3 col-lg-2 col-sm-3" *ngIf="product.price.toString() === product.price">{{product?.price}} €</div>
+                            <div class="col-xs-3 col-lg-2 col-sm-3" *ngIf="product.price.toString() !== product.price">{{product?.price.toFixed(2)}} €</div>
+                            <div class="col-xs-1 col-lg-1 col-sm-1" style="font-weight:bold; cursor: pointer" (click)="onDeleteFromCart(product)">X</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="tabbable paper-shadow relative" data-z="0.5" style="width:106%; border-radius:5px;">
+            <div class="tab-content" style="border-radius:5px;">
+                <div class="row">
+                    <div class="col-lg-2 col-sm-3 col-xs-3">
+                        <div style="font-size:24px; font-weight:bold;">Prix Total</div>
+                    </div>
+
+                    <div class="col-lg-7 col-xs-2">&nbsp;&nbsp;</div>
+                    <div class="col-lg-2 col-xs-4">{{mycart?.total.toFixed(2)}} €</div>
+                    <div class="col-lg-1 col-xs-1">
+                        <a class="btn btn-warning" style="margin-left:-25px; margin-top:-7px" [routerLink]="['../payment']">Valider</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-3">
+        <hr/>
+    </div>
+</div>

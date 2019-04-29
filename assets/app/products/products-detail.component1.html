@@ -1,0 +1,401 @@
+<div class="media media-grid media-clearfix-xs" *ngIf="product">
+    <div class="media-body">
+
+        <div class="page-section">
+            <div class="media">
+                <div class="media-left">
+                    <span class="icon-block s60 bg-lightred">
+                        <i [class]="product?.fa_title"></i>
+                    </span>
+                </div>
+                <div class="media-body">
+                    <h1 class="text-display-1 margin-none">{{product?.name}}</h1>
+                    <p class="margin-none">
+                        {{product?.second_title}}
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-section">
+            <div class="row">
+                <div class="item col-xs-12 col-lg-6">
+                    <div class="width-550 paragraph-inline">
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <div *ngIf="product?.video != '' && product?.video;else other_content">
+                                <iframe [src]="product?.video | safe" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen"></iframe>
+                            </div>
+                            <ng-template #other_content>
+                                <img [src]="product?.picture" style="height:320px">
+                            </ng-template>
+                        </div>
+                    </div>
+                </div>
+                <div class="item col-xs-12 col-lg-6">
+                    <div style="margin-left:40px;">
+                        <br>
+                        <ul style="list-style-type: none;">
+                            <div innerHTML="{{product?.benefits_detail}}"></div>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+            <br>
+            <div innerHTML="{{product?.description_detail}}"></div>
+
+            <br/>
+            <p class="margin-none">
+                <span *ngFor="let section of product?.sections">
+                    <span class="label bg-gray-dark" *ngIf="section.sectionName == 'Best Sellers' || section.sectionName == 'Nouveau'">
+                        {{section.sectionName}}</span>
+                </span>
+                <span *ngFor="let section of product?.sections">
+                    <span class="label label-grey-200" *ngIf="section.sectionName != 'Best Sellers' && section.sectionName != 'Nouveau'">
+                        {{section.sectionName}}</span>
+                </span>
+
+            </p>
+        </div>
+
+
+
+
+        <div class="page-section" *ngIf="!isInProducts(product) && product.price >0 && myuser && product && !isInBasket(myuser, product)">
+            <div class="row">
+                <div class="item col-xs-12 col-lg-1"></div>
+                <div class="item col-xs-12 col-lg-5">
+                    <div style="display:block; text-align:center; cursor: pointer">
+                        <br>
+                        <a class="btn btn-warning btn-lg paper-shadow relative" data-z="1" data-hover-z="2" data-animated (click)="addInBacket()">
+                            <span style="font-size:20px;">
+                                <span class="glyphicon glyphicon-shopping-cart"></span> &nbsp; Ajouter Au Panier</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="item col-xs-12 col-lg-1"></div>
+                <div class="item col-xs-12 col-lg-4">
+                    <div style="display:block; text-align:center; margin-top:-5px">
+                        <br>
+                        <div class="clp-component-render">
+                            <span class="badge badge-lg badge-accented coral" style="font-size:16px; color:red; background:none">
+                                Accèdez à ce produit pour :
+                            </span>
+                        </div>
+                        <div style="height:8px;font-size:8px;">&nbsp;</div>
+                        <div>
+                            <span style="font-size:25px; font-weight:bold; color:gray">{{product?.price}} €</span> &nbsp;&nbsp;
+                            <s style="font-size:16px; color:gray">Valeur : {{product?.value}} €</s>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+    </div>
+    <div class="media-right">
+
+        <div class="page-section width-270 width-auto-xs">
+
+            <!-- .panel -->
+            <div class="panel panel-default paper-shadow" data-z="0.5" data-hover-z="1" style="border-style: solid; border-color: blue;"
+                data-animated *ngIf="isInProducts(product);else promo_produit">
+                <div class="panel-heading">
+                    <h4 class="text-headline">Votre Produit</h4>
+                </div>
+                <div class="panel-body" *ngIf="product.price > 0">
+                    <p class="text-caption margin-none">
+                        <i class="fa fa-sign-in fa-fw"></i> Identifiant : Reçus par email sous 24h
+                        <br>{{myuser?.email}}
+                        <br>
+                        <br> Accès actif dans un maximum de 24h
+                        <br>
+                        <br>
+                        <i class="fa fa-globe fa-fw"></i>
+                        <a target="_blank" [href]="product.link_to" style="font-size:15px">Accès au Logiciel</a>
+                        <br/>
+                        <br/>
+                        <span *ngIf="product.downloadableBonus && product.downloadableBonus != ''">
+                            <i class="fa fa-star fa-fw"></i>
+                            <a [routerLink]="['/bonus/'+product.downloadableBonus]" style="font-size:15px">Accès Bonus Téléchargeables</a>
+                            <br>
+                            <br>
+                        </span>
+                        <button style="width:103%" type="button" class="btn btn-info" [routerLink]="['/trainings/cours/'+product.formationProduit]">
+                            <span style="font-size:12px">Formation au Logiciel</span>
+                        </button>
+                    </p>
+                </div>
+                <div class="panel-body text-center" *ngIf="product.price == 0">
+                    <p *ngIf="myuser && product">
+                        <span style="font-size:18px;color:green">
+                            <i class="fa fa-check fa-fw"></i>Produit Offert</span>
+                    </p>
+                    <div style="display:block; text-align:center; cursor: pointer">
+                        <br>
+                        <p class="text-caption margin-none">
+                            &nbsp;&nbsp;
+                            <i class="fa fa-globe fa-fw"></i>
+                            <a target="_blank" [href]="product.link_to" style="font-size:15px"> Accès au Logiciel</a>
+                            <br/>
+                            <br/>
+                            <span *ngIf="product.downloadableBonus && product.downloadableBonus != ''">
+                                <i class="fa fa-star fa-fw"></i>
+                                <a [routerLink]="['/bonus/'+product.downloadableBonus]" style="font-size:15px">Accès Bonus Téléchargeables</a>
+                                <br>
+                                <br>
+                            </span>
+                            <a style="width:103%" type="button" class="btn btn-info" [routerLink]="['/trainings/cours/'+product.formationProduit]">
+                                <span style="font-size:12px">Formation au Logiciel</span>
+                            </a>
+                        </p>
+                    </div>
+                </div>
+                <hr class="margin-none" />
+            </div>
+            <!-- // END .panel -->
+
+
+            <ng-template #promo_produit>
+
+
+                <!-- .panel : Inclus avec ce produit-->
+                <div class="panel panel-default paper-shadow" data-z="0.5" data-hover-z="1" data-animated *ngIf="product?.offered_trainings.length > 0">
+                    <div class="panel-body">
+                        <h6 class="text-headline">Offert avec cet Outil</h6>
+                    </div>
+                    <ul class="list-group">
+                        <li class="list-group-item" *ngFor="let offeredTraining of product?.offered_trainings">
+                            <div class="media v-middle">
+                                <div class="media-left">
+                                    <div class="icon-block s30 bg-green-400 text-white">
+                                        <i [class]="offeredTraining.fa_title"></i>
+                                    </div>
+                                </div>
+                                <div class="media-body">
+                                    <a [routerLink]="['/trainings/'+offeredTraining.name]" class="link-text-color">{{offeredTraining.name}}</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <!-- // END .panel -->
+
+                <!-- .panel : Prix-->
+                <div class="panel panel-default paper-shadow" data-z="0.5" data-hover-z="1" data-animated>
+                    <div class="panel-body">
+                        <h6 class="text-headline">À Propos du Produit</h6>
+                    </div>
+                    <hr class="margin-none" />
+                    <div class="panel-body text-center" *ngIf="product.price > 0">
+
+                        <div class="clp-component-render">
+                            <!-- <span class="badge badge-lg badge-accented coral">
+                                -15% depuis l'Espace Membre
+                            </span> -->
+                        </div>
+                        <div>
+                            <div style="height:3px;font-size:3px;">&nbsp;</div>
+                            <span style="font-size:27px; font-weight:bold; color:gray">{{product?.price}} €</span> &nbsp;&nbsp;
+                            <br>
+                            <div style="height:3px;font-size:3px;">&nbsp;</div>
+                            <s style="font-size:16px;color:gray">Valeur : {{product?.value}} €</s>
+                        </div>
+                        <br>
+                        <p *ngIf="myuser && product">
+                            <a class="btn btn-warning btn-lg paper-shadow relative" data-z="1" data-hover-z="2" data-animated *ngIf="!isInBasket(myuser, product)"
+                                (click)="addInBacket()">
+                                <span style="font-size:18px;">
+                                    <span class="glyphicon glyphicon-shopping-cart"></span> &nbsp; Ajouter Au Panier</span>
+                            </a>
+                            <span *ngIf="isInBasket(myuser, product)">
+                                <span style="font-size:18px;color:green">
+                                    <i class="fa fa-check fa-fw"></i>Ajouté au panier</span>
+                                <br>
+                                <div style="height:4px;font-size:4px;">&nbsp;</div>
+                                <a class="btn btn-warning btn-lg paper-shadow relative" data-z="1" data-hover-z="2" data-animated [routerLink]="['/checkout']">
+                                    <span style="font-size:18px;">
+                                        <span class="glyphicon glyphicon-shopping-cart"></span> &nbsp; Voir Mon Panier</span>
+                                </a>
+                            </span>
+                        </p>
+                    </div>
+
+
+                    <div class="panel-body text-center" *ngIf="product.price == 0">
+                        <p *ngIf="myuser && product">
+                            <span style="font-size:18px;color:green">
+                                <i class="fa fa-check fa-fw"></i>Produit Offert</span>
+                        </p>
+                        <div style="display:block; text-align:center; cursor: pointer">
+                            <br>
+                            <p class="text-caption margin-none">
+                                <i class="fa fa-globe fa-fw"></i>
+                                <a target="_blank" [href]="product.link_to" style="font-size:15px">Accès au Logiciel</a>
+                                <br/>
+                                <br/>
+                                <span *ngIf="product.downloadableBonus && product.downloadableBonus != ''">
+                                    <i class="fa fa-star fa-fw"></i>
+                                    <a [routerLink]="['/bonus/'+product.downloadableBonus]" style="font-size:15px">Accès Bonus Téléchargeables</a>
+                                    <br>
+                                    <br>
+                                </span>
+                                <a style="width:103%" type="button" class="btn btn-info" [routerLink]="['/trainings/cours/'+product.formationProduit]">
+                                    <span style="font-size:12px">Formation au Logiciel</span>
+                                </a>
+                                <br>
+                                <br>
+                                <a class="btn btn-success relative" data-z="1" data-hover-z="2" id='membersoftware' data-animated (click)="addInMyProducts()">
+                                    <span style="font-size:12px;">Ajouter À Mes Logiciels - Membre</span>
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- // END .panel -->
+            </ng-template>
+
+
+            <!-- .panel -->
+            <div class="panel panel-default paper-shadow" data-z="0.5" data-hover-z="1" data-animated *ngIf="product?.linked_products.length > 0">
+                <div class="panel-body">
+                    <span style="font-size:20px">Ces Logiciels pourraient vous interesser</span>
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item" *ngFor="let linkedProducts of product?.linked_products">
+                        <div class="media v-middle">
+                            <div class="media-left">
+                                <div class="icon-block s30 bg-grey-400 text-white">
+                                    <i [class]="linkedProducts.fa_title"></i>
+                                </div>
+                            </div>
+                            <div class="media-body">
+                                <a [routerLink]="['/products/'+linkedProducts.name]" class="link-text-color">{{linkedProducts.name}}</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <!-- // END .panel -->
+
+            <!-- .panel 
+            <div class="panel panel-default paper-shadow" data-z="0.5" data-hover-z="1" data-animated *ngIf="product?.linked_trainings.length > 0">
+                <div class="panel-body">
+                        <span style="font-size:20px">Ces Cours pourraient vous interesser</span>
+                    </div>
+                <ul class="list-group">
+                    <li class="list-group-item" *ngFor="let linkedTraining of product?.linked_trainings">
+                        <div class="media v-middle">
+                            <div class="media-left">
+                                <div class="icon-block s30 bg-grey-400 text-white">
+                                    <i [class]="linkedTraining.fa_title"></i>
+                                </div>
+                            </div>
+                            <div class="media-body">
+                                <a [routerLink]="['/trainings/'+linkedTraining.name]" class="link-text-color">{{linkedTraining.name}}</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <!-- // END .panel -->
+
+        </div>
+        <!-- // END .page-section -->
+
+    </div>
+</div>
+
+
+
+
+<!-- Ajout au panier -->
+<div class="backdrop" [ngStyle]="{'display': displayPopUp}"></div>
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display': displayPopUp}">
+    <div class="row">
+        <div class="col-lg-12" style="height:200px">
+        </div>
+        <div class="col-lg-12">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content" style="border:1px solid black">
+                    <div class="modal-header">
+                        <button type="button" class="close" aria-label="Close" (click)="onHideAdded()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title"> Ajouté au Panier !</h4>
+                    </div>
+                    <div class="row modal-body">
+                        <div class="col-lg-5 col-xs-12">
+                            <a class="btn btn-info btn-lg paper-shadow relative" data-z="1" data-hover-z="2" data-animated (click)="onHideAdded()">
+                                <span style="font-size:18px;">
+                                    <span class="glyphicon glyphicon-shopping-cart"></span> &nbsp; Continuer ma visite</span>
+                            </a>
+                        </div>
+                        <div class="col-lg-2 col-xs-12"></div>
+                        <div class="col-lg-4 col-xs-12">
+                            <a class="btn btn-warning btn-lg paper-shadow relative" data-z="1" data-hover-z="2" data-animated [routerLink]="['/checkout']">
+                                <span style="font-size:18px;">
+                                    <span class="glyphicon glyphicon-shopping-cart"></span> &nbsp; Voir Mon Panier</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+    </div>
+</div>
+<!-- /.modal -->
+<!-- Fin au panier -->
+
+
+
+<!-- Ajout au Espace Membre -->
+<div class="backdrop" [ngStyle]="{'display': displayPopUpMyProducts}"></div>
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display': displayPopUpMyProducts}">
+    <div class="row">
+        <div class="col-lg-12" style="height:200px">
+        </div>
+        <div class="col-lg-12">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content" style="border:1px solid black">
+                    <div class="modal-header">
+                        <button type="button" class="close" aria-label="Close" (click)="onHideAddedMyProducts()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title"> Ajouté à vos Logiciels !</h4>
+                    </div>
+                    <div class="row modal-body">
+                        <div style="text-align:center">Vous pouvez désormais retrouver ce logiciel dans votre onglet Membre -> Mes Logiciels&nbsp;&nbsp;</div>
+                        <br>
+                        <div class="col-lg-5 col-xs-12">
+                            <a class="btn btn-info btn-lg paper-shadow relative" data-z="1" data-hover-z="2" data-animated (click)="onHideAddedMyProducts()">
+                                <span style="font-size:18px;">
+                                    &nbsp; Continuer ma visite</span>
+                            </a>
+                        </div>
+                        <div class="col-lg-3 col-xs-12"></div>
+                        <div class="col-lg-4 col-xs-12">
+                            <a class="btn btn-info btn-lg paper-shadow relative" data-z="1" data-hover-z="2" data-animated [routerLink]="['/membre/produits']">
+                                <span style="font-size:18px;">
+                                    &nbsp; Mes Logiciels</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+    </div>
+</div>
+<!-- /.modal -->
+<!-- Fin à l'espace membre -->

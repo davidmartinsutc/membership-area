@@ -1,0 +1,67 @@
+<div class="page-header">
+  <h1>Gestionnaire de Notifications</h1>
+</div>
+
+
+<div class="jumbotron">
+
+  <div class="row">
+    <h2>Ajouter une Notification</h2>
+    <br>
+    <form (ngSubmit)="onSubmit(addNotifForm)" #addNotifForm="ngForm">
+
+      <div class="form-group">
+        <label for="notifTime">Date et Heure de Creation : </label> {{dateetheure}}
+      </div>
+
+      <div class="form-group">
+          <label for="notifFav">Favicon</label>
+          <input type="text" class="form-control" id="notifFav" placeholder="Lien de la notif" [ngModel]="mynotif?.favicon" name="notif_favicon">
+      </div>
+
+      <div class="form-group">
+        <label for="notifContent">Contenu (html)</label>
+        <textarea class="form-control" id="notifContent" rows="3" name="notif_content" style="height:200px" [ngModel]="mynotif?.content"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="notifLink">Lien vers la notif (chemin relatif /)</label>
+        <input type="text" class="form-control" id="notifLink" placeholder="Lien de la notif" [ngModel]="mynotif?.link" name="notif_link">
+      </div>
+
+      <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+  </div>
+
+  <div class="row">
+    <h2>Liste des Notifications</h2>
+    <br>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Date et Heure (creation = envoi)</th>
+          <th scope="col">Contenu (html)</th>
+          <th scope="col">Lien (chemin relatif /)</th>
+          <th scope="col">Favicon</th>
+          <th scope="col">Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let notification of notifications">
+          <td>{{notification.date}}</td>
+          <td>{{notification.content}}</td>
+          <td>{{notification.link}}</td>
+          <td><i [class]="notification.favicon"></i></td>
+          <td>
+            <a class="btn btn-primary" (click)="notificationDelete(notification)">Delete</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+
+  </div>
+  <br>
+  <br>
+</div>

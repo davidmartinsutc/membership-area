@@ -1,0 +1,60 @@
+<div class="page-header">
+        <h1>Sections pour les Logiciels</h1>
+</div>
+      
+
+      <div class="jumbotron">
+
+        <div class="row">
+                <h2>Ajouter une Section Produit</h2>
+                <br>
+                <form (ngSubmit)="onSubmit(addSectionForm)" #addSectionForm="ngForm">
+
+                    <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th scope="col">Position</th>
+                                <th scope="col">Nom Section</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td><input type="text" id="position" class="form-control" [ngModel]="mysection?.position" name="position" ></td>
+                                <td><input type="text" id="sectionName" class="form-control" [ngModel]="mysection?.sectionName" name="sectionName" ></td>
+                                <td><input type="hidden" id="oldSectionName" class="form-control" [ngModel]="mysection?.sectionName" name="oldSectionName" ></td>
+                            </tr>
+                            </tbody>
+                    </table>
+                    <button
+                    class="btn btn-primary"
+                    type="submit">Submit</button>
+                </form>
+       </div>
+
+        <div class="row">
+            <h2>Liste des Sections Logiciels</h2>
+            <br>
+
+            <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">Position</th>
+                        <th scope="col">Nom Section</th>
+                        <th scope="col">Delete</th>
+                        <th scope="col">Edit</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let section of sections">
+                        <td>{{section.position}}</td>
+                        <td>{{section.sectionName}}</td>
+                        <td><a class="btn btn-primary" (click)="sectionDelete(section)">Delete</a></td>
+                        <td><a class="btn btn-primary" (click)="sectionEdit(section)">Edit</a></td>
+                      </tr>
+                    </tbody>
+            </table>
+
+
+        </div>
+<br><br>
+</div>

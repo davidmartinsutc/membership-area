@@ -1,0 +1,91 @@
+<style>
+        body {
+            width:40%;
+            margin-left:auto; 
+            margin-right:auto;
+        }
+        table, th, td {
+            width:100%;
+            border: 1px solid black;
+            border-collapse: collapse;
+            border-color: lightgrey;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+        th, td {
+            padding: 15px;
+        }
+        th {
+            text-align: left;
+        }
+        td {
+            color:grey;
+        }
+        .title {
+            font-size:13px;
+            font-weight: bold;
+        }
+        .prix {
+            font-size:22px;
+            color:black;
+        }
+        </style>
+        
+        
+        <!DOCTYPE html>
+        <html>
+        
+        <head>
+            <title>🔥 Merci de votre confiance</title>
+        </head>
+        
+        <body>
+            <div>
+                <p>Hello {{name}} !
+                    <br><br><strong>Un grand Merci pour votre confiance !</strong>
+                    <br><br>N'hésitez surtout pas si vous avez une question ou une remarque, car nous voulons avant tout des clients satisfaits!
+                    <br><br>Comme d'habitude, vos produits sont disponibles dans votre <a href="https://membre.smaltonline.com">Espace Membre</a>
+                    <br>
+                    <br> À tout de suite !
+                </p>
+                <br>
+                <br>
+        
+                <!--Facture-->
+        
+            </div>
+        
+        
+        <table>
+          <tr>
+            <th>Détails de votre commande</th>
+          </tr>
+          <tr>
+            <td><span class="title">Votre email</span>
+            <br>{{email}}</td>
+          </tr>
+          <tr>
+            <td><span class="title">Date</span>
+            <br>{{date}}</td>
+          </tr>
+          <tr>
+            <td><span class="title">Produit</span>
+            {{#each produits as |produit|}}
+                <div class="row">{{produit.name}}</div>
+            {{/each}}
+          </tr>
+           <tr>
+            <td><span class="title">Montant</span>
+            <br><span class="prix">€{{total}}</span></td>
+          </tr>
+        </table>
+        
+        <div style="text-align:center">
+        <br><br>
+        Une Question ?
+        <br>
+        contact@smaltonline.com
+        </div>
+        
+        </body>
+        
+        </html>

@@ -1,0 +1,59 @@
+<div class="page-section" style="margin-bottom:-40px;">
+    <div class="media v-middle">
+        <div class="media-body">
+            <h1 class="text-display-1 margin-none">Bonus</h1>
+            <br/>
+            <p>Régulièrement, nous vous offrons des bonus accessibles ici !
+                <br> Outil et Logiciels Gratuits, articles, bons plans, ...</p>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-sm-9">
+
+        <!-- Debut des bonus -->
+        <div style="height:20px;"></div>
+        <div class="row" data-toggle="isotope">
+
+        </div>
+
+        <div class="page-section half" *ngFor="let bonus of bonuses">
+            <div class="tabbable paper-shadow relative" data-z="0.5">
+                <div class="tab-content" style="border-radius:2px;">
+                    <div innerHTML="{{bonus?.content}}"></div>
+                </div>
+            </div>
+            <br>
+            <br>
+        </div>
+
+    </div>
+
+    <div class="col-sm-3">
+        <!-- .panel -->
+        <div class="panel panel-default paper-shadow" data-z="0.5" data-hover-z="1" data-animated style="margin-top:36px;">
+            <div class="panel-body">
+                <h6 class="text-headline">Informations</h6>
+            </div>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <div class="media v-middle">
+                        <div class="media-left">
+                            <div class="icon-block" style="width: 40px; height: 60px;line-height: 60px; font-size: 30px;">
+                                <i class="fa fa-quora" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="media-body" style="font-size:12px">
+                            Smalt, à votre service !
+                            <br>
+                            <strong>Contactez nous :</strong> membre@smaltonline.com
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <!-- // END .panel -->
+    </div>
+</div>

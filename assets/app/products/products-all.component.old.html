@@ -1,0 +1,171 @@
+<div class="row">
+    <div class="col-sm-9">
+        <div class="page-section" style="margin-bottom:-40px;">
+            <div class="media v-middle">
+                <div class="media-body">
+                    <h1 class="text-display-1 margin-none">Logiciels</h1>
+                    <br/>
+                    <p style="font-size: 15px; font-style: oblique;">{{quotes[quoteNb].quote}}</p>
+                    <p style="font-size: 12px; font-style: oblique;">{{quotes[quoteNb].author}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="page-section" style="margin-bottom:-20px;">
+            <div class="panel panel-default paper-shadow" data-z="0.5">
+                <div class="panel-heading">
+                    <h4 class="text-headline margin-none">Mes Logiciels</h4>
+                    <p class="text-subhead text-light" style="font-size:14px">Tous vos logiciels sont disponibles dans votre
+                        <a [routerLink]="['/membre/produits']">
+                            <span style="color:darkgreen; cursor:pointer">Onglet Membre</span>
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-sm-9">
+
+        <!-- Debut des produits -->
+        <div style="height:36px;"></div>
+        <div class="row" data-toggle="isotope">
+            <div *ngIf="loader" class="loader"></div>
+            <div class="item col-xs-12 col-sm-6 col-lg-4" *ngFor="let product of products">
+                <div class="panel panel-default paper-shadow" data-z="0.5" style="width:95%">
+
+                    <div class="cover overlay cover-image-full hover">
+                        <span class="img icon-block height-200 bg-default"></span>
+
+                        <img src="{{product.picture}}" class="padding-none overlay overlay-full icon-block bg-default height-200">
+
+
+                        <a [routerLink]="[product.name]" class="overlay overlay-full overlay-hover overlay-bg-white height-200">
+                            <span class="v-center">
+                                <span class="btn btn-circle btn-white btn-lg ">
+                                    <i class="fa fa-rocket"></i>
+                                </span>
+                            </span>
+                        </a>
+
+                    </div>
+
+                    <div class="panel-body">
+
+                        <span style="font-size:18px; font-weight:bold; text-decoration: none;">
+                            <a [routerLink]="[product.name]" style="text-decoration: none;color:black ">{{product.name}}</a>
+                        </span>
+                        <p>
+                            <span style="font-weight: bold;">Categorie : </span>
+                            <span *ngFor="let section of product.sections">{{section.sectionName}} {{section.sectionName == product.sections[product.sections.length-1].sectionName
+                                ? '' : ','}} </span>
+                        </p>
+                    </div>
+
+                    <hr class="margin-none" />
+                    <div class="panel-body">
+
+
+                        <p>{{product.description_preview}}</p>
+
+                        <!-- <div class="media v-middle">
+                                <div class="media-left">
+                                    <img src="/images/people/50/guy-4.jpg" alt="People" class="img-circle width-40" />
+                                </div>
+                                <div class="media-body">
+                                    <h4>
+                                        <a href="">Adrian Demian</a>
+                                        <br/>
+                                    </h4>
+                                    Instructor
+                                </div>
+                            </div> -->
+
+                        <div style="width:105%" *ngIf="!isInProducts(product); else possede_produit">
+                            <div style="height:5px;font-size:5px;">&nbsp;</div>
+                            <button style="width:95%" type="button" class="btn btn-success" [routerLink]="[product.name]">En Savoir Plus &nbsp;</button>
+                            <br>
+                            <br>
+                            <div class="clp-component-render" style="display: block; text-align: center; margin-left:-15px;" *ngIf="product.price > 0">
+                                <!--<span class="badge badge-lg badge-accented coral">
+                                    -15% depuis l'Espace Membre
+                                </span>-->
+                                <div style="height:5px;font-size:5px;">&nbsp;</div>
+                                <span class="badge badge-lg badge-accented coral">
+                                    Formation Offerte avec ce Logiciel
+                                </span>
+                            </div>
+                            <div class="clp-component-render" style="display: block; text-align: center; margin-left:-15px;" *ngIf="product.price == 0">
+                                <span style="font-size:18px;color:green; margin-left:-16px">
+                                    <i class="fa fa-check fa-fw"></i>Produit Offert</span>
+                            </div>
+                        </div>
+                        <ng-template #possede_produit>
+                            <div style="height:5px;font-size:5px;">&nbsp;</div>
+                            <div style="width:105%" *ngIf="isInProducts(product)">
+                                <br>
+                                <span style="font-weight:bold">
+                                    <span style="font-size:18px;color:green; margin-left:-16px">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                        <i class="fa fa-check fa-fw"></i>
+                                    </span>Vous possédez ce logiciel !</span>
+                            </div>
+                            <br>
+                            <div style="width:105%" *ngIf="isInProducts(product)">
+                                <a class="btn btn-white btn-flat paper-shadow relative" data-z="0" data-hover-z="1" data-animated [routerLink]="['/trainings/cours/'+product.formationProduit]">
+                                    <i class="fa fa-arrow-right fa-fw"></i> Accèder aux formations liées</a>
+
+                            </div>
+                            <div style="height:1px;font-size:1px;">&nbsp;</div>
+                        </ng-template>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <!--
+        <ul class="pagination margin-top-none">
+            <li class="disabled">
+                <a href="#">&laquo;</a>
+            </li>
+            <li class="active">
+                <a href="#">1</a>
+            </li>
+            <li>
+                <a href="#">2</a>
+            </li>
+            <li>
+                <a href="#">3</a>
+            </li>
+            <li>
+                <a href="#">&raquo;</a>
+            </li>
+        </ul>
+    -->
+
+    </div>
+
+    <div class="col-sm-3">
+        <div data-scrollable>
+            <h4 class="category">Catégories</h4>
+            <ul class="sidebar-block list-group list-group-menu list-group-minimal">
+                <li class="list-group-item">
+                    <a (click)="sectionFilter('all')" style="cursor: pointer">Tous les logiciels</a>
+                </li>
+                <li class="list-group-item" *ngFor="let sectionCounter of sectionCount">
+                    <a (click)="sectionFilter(sectionCounter.section)" style="cursor: pointer">
+                        <span class="badge pull-right">{{sectionCounter.nb}}</span>{{sectionCounter.section.sectionName}}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

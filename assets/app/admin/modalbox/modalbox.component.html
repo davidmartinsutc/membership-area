@@ -1,0 +1,36 @@
+<div class="backdrop" [ngStyle]="{'display': display}"></div>
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display': display}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" aria-label="Close" (click)="onHideAddProducts()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Gérer les {{modalBox?.whatFor}}s de {{modalBox?.user.firstName}} {{modalBox?.user.lastName}}</h4>
+            </div>
+            <div class="modal-body">
+                <p>Attribuer des {{modalBox?.whatFor}}s à cet utilisateur :</p>
+                <br>
+                <div *ngFor="let product of modalBox?.products">
+                    <div class="form-check form-check-inline">
+                        <div *ngIf="userHave(product)">
+                            <input class="form-check-input" type="checkbox" id="{{product.name}}" (change)="addSelectedProduct(product)" checked>
+                            <label class="form-check-label" for="{{product.name}}">{{product.name}}</label>
+                        </div>
+                        <div *ngIf="!userHave(product)">
+                            <input class="form-check-input" type="checkbox" id="{{product.name}}" (change)="addSelectedProduct(product)" unchecked>
+                            <label class="form-check-label" for="{{product.name}}">{{product.name}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" (click)="onAddProducts()">Ajouter</button>
+                <button type="button" class="btn btn-default" (click)="onHideAddProducts()">Fermer</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

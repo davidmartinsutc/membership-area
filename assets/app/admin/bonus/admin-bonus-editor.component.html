@@ -1,0 +1,119 @@
+<div class="page-header">
+    <h1>Edition de la page de Bonus {{bonusPage?.titre}}</h1>
+</div>
+
+
+<div class="jumbotron">
+
+    <div class="row">
+        <a class="btn btn-primary">Apperçu</a>
+        <h2>Infos du bonusPage</h2>
+        <br>
+        <h4>ID : {{bonusPage?.bonusPageID}}</h4>
+        <form (ngSubmit)="onUpdateBonusPage(updateBonusPageForm)" #updateBonusPageForm="ngForm">
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Nom du bonusPage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <input type="text" id="titre" class="form-control" [ngModel]="bonusPage?.titre" name="titre">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="form-group">
+                <label for="description">Description (html)</label>
+                <textarea class="form-control" id="description" rows="4" name="description" style="height:70px" [ngModel]="bonusPage?.description"></textarea>
+            </div>
+            <button class="btn btn-primary" type="submit">Valider Les changements</button>
+            <div id="validationOK" style="font-size:20px; color:red">&nbsp;</div>
+        </form>
+    </div>
+    <br>
+    <br>
+    <hr/>
+
+    <div class="row">
+        <h2>Bonus du bonusPage</h2>
+        <div id="changesOK" style="font-size:20px; color:red">&nbsp;</div>
+        <div class="row" *ngFor="let bonus of bonusPage?.bonus" style="margin-left:50px">
+            <div (click)="onToggle(bonus)" style="cursor: pointer; margin-bottom:-20px; margin-top: 35px; font-size:15px; font-weight: bold; color:darkblue">
+                <span [id]="bonus.titre+'arrow'">
+                    <i class="fa fa-arrow-right fa-fw"></i>
+                </span>{{bonus?.titre}}</div>
+            <div [id]="bonus.titre" style="display: none; margin-top:10px">
+                <form (ngSubmit)="onEditBonus(editBonusForm, bonus)" #editBonusForm="ngForm">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col" width="30%">Nom du Bonus</th>
+                                <th scope="col">Description du bonus</th>
+                                <th scope="col">Image du bonus</th>
+                                <th scope="col">Lien de telechargement du bonus</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <input type="text" id="titre" class="form-control" [ngModel]="bonus?.titre" name="titre">
+                                </td>
+                                <td>
+                                    <input type="text" id="description" class="form-control" [ngModel]="bonus?.description" name="description">
+                                </td>
+                                <td>
+                                    <input type="text" id="image" class="form-control" [ngModel]="bonus?.image" name="image">
+                                </td>
+                                <td>
+                                    <input type="text" id="downloadLink" class="form-control" [ngModel]="bonus?.downloadLink" name="downloadLink">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button class="btn btn-primary" type="submit">Editer Bonus</button>
+                    <a class="btn btn-primary" (click)="onDeleteBonus(bonus)">Supprimer Bonus</a>
+                </form>
+
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <div class="row">
+            <h4>Ajouter un Bonus</h4>
+            <form (ngSubmit)="onAddBonus(addBonusForm)" #addBonusForm="ngForm">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nom du Bonus</th>
+                            <th scope="col">Image</th>
+                            <th scope="col">Lien de Telechargement</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <input type="text" id="titre" class="form-control" [ngModel]="bonus?.titre" name="titre">
+                            </td>
+                            <td>
+                                <input type="text" id="image" class="form-control" [ngModel]="bonus?.image" name="image">
+                            </td>
+                            <td>
+                                <input type="text" id="downloadLink" class="form-control" [ngModel]="bonus?.downloadLink" name="downloadLink">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="form-group">
+                    <label for="description">Description (html)</label>
+                    <textarea class="form-control" id="description" rows="4" name="description" style="height:70px" [ngModel]="bonus?.description"></textarea>
+                </div>
+                <button class="btn btn-primary" type="submit">Ajouter Bonus</button>
+            </form>
+        </div>
+    </div>
+</div>
